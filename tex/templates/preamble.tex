@@ -282,7 +282,7 @@
 %================================
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section]{claim}{Claim}
+\newtcbtheorem[number within=chapter]{claim}{Claim}
 {%
 	enhanced
 	,breakable
@@ -351,7 +351,7 @@
 % EXAMPLE BOX
 %================================
 
-\newtcbtheorem[number within=section]{Example}{Example}
+\newtcbtheorem[number within=chapter]{Example}{Example}
 {%
 	colback = myexamplebg
 	,breakable
@@ -591,7 +591,7 @@
 \newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
 \newcommand{\mlenma}[2]{\begin{Lenma}{#1}{}#2\end{Lenma}}
 \newcommand{\mprop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
-\newcommand{\clm}[3]{\begin{claim}{#1}{#2}#3\end{claim}}
+\newcommand{\clm}[2]{\begin{claim}{#1}{}#2\end{claim}}
 \newcommand{\wc}[2]{\begin{wconc}{#1}{}\setlength{\parindent}{1cm}#2\end{wconc}}
 \newcommand{\thmcon}[1]{\begin{Theoremcon}{#1}\end{Theoremcon}}
 \newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
