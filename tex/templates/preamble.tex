@@ -281,8 +281,10 @@
 % CLAIM
 %================================
 
+\newcounter{claim} \numberwithin{claim}{chapter}
+
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=chapter]{claim}{Claim}
+\newtcbtheorem[number within=chapter, use counter=claim]{claim}{Claim}
 {%
 	enhanced
 	,breakable
@@ -351,7 +353,9 @@
 % EXAMPLE BOX
 %================================
 
-\newtcbtheorem[number within=chapter]{Example}{Example}
+\newcounter{example} \numberwithin{example}{chapter}
+
+\newtcbtheorem[number within=chapter, use counter=example]{Example}{Example}
 {%
 	colback = myexamplebg
 	,breakable
@@ -389,7 +393,9 @@
 % DEFINITION BOX
 %================================
 
-\newtcbtheorem[number within=chapter]{Definition}{Definition}{enhanced,
+\newcounter{definition} \numberwithin{definition}{chapter}
+
+\newtcbtheorem[number within=chapter, use counter=definition]{Definition}{Definition}{enhanced,
 	before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
 	attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
 	boxed title style={frame code={
@@ -644,6 +650,18 @@
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\round}{\lfloor}{\rceil}
+
+
+\DeclareMathOperator{\Rang}{rang}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Abb}{Abb}
+\DeclareMathOperator{\Par}{Par}
+\DeclareMathOperator{\Vol}{Vol}
+
+
 
 \newsavebox\diffdbox
 \newcommand{\slantedromand}{{\mathpalette\makesl{d}}}
