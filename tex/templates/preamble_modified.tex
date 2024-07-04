@@ -237,10 +237,10 @@
 % CLAIM
 %================================
 
-\newcounter{claim} \numberwithin{claim}{chapter}
+\newcounter{clm} \numberwithin{clm}{chapter}
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=chapter, use counter=claim]{claim}{Satz}
+\newtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}
 {%
 	enhanced
 	,breakable
@@ -642,3 +642,10 @@
 	  \end{tikzpicture}}%
 	\@starttoc{toc}}
 \makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ALIGN WITH LESS VSPACE %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\jot}{0pt}
