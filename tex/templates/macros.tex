@@ -4,8 +4,6 @@
 \newcommand{\inv}{^{-1}}
 
 %From M170 "Introduction to Graph Theory" at SJSU
-\DeclareMathOperator{\diam}{diam}
-\DeclareMathOperator{\ord}{ord}
 \newcommand{\defeq}{\overset{\mathrm{def}}{=}}
 
 %From the USAMO .tex files
@@ -40,6 +38,20 @@
 \DeclareMathOperator{\Hom}{Hom} % homomorphism
 \DeclareMathOperator{\Mor}{Mor} % morphisms
 \DeclareMathOperator{\End}{End} % endomorphism
+\DeclareMathOperator{\Span}{span} % span
+\DeclareMathOperator{\Hau}{Hau} % Hauptraum
+\DeclareMathOperator{\Char}{char} % Characteristic
+\DeclareMathOperator{\sgn}{sgn} % signum
+\DeclareMathOperator{\Id}{Id} % Identity
+\DeclareMathOperator{\Abb}{Abb} % Abbildung
+\DeclareMathOperator{\Par}{Par} %
+\DeclareMathOperator{\Vol}{Vol} % Volume
+\DeclareMathOperator{\Lap}{\mathcal{L}}
+\DeclareMathOperator{\Var}{Var} % varience
+\DeclareMathOperator{\Cov}{Cov} % covarience
+\DeclareMathOperator{\E}{\mathbb{E}} % expected
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\ord}{ord}
 
 \newcommand{\eps}{\epsilon}
 \newcommand{\veps}{\varepsilon}
@@ -86,3 +98,24 @@
 
 \newcommand{\sol}{\setlength{\parindent}{0cm}\textbf{\textit{Solution:}}\setlength{\parindent}{1cm} }
 \newcommand{\solve}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Solution: }}\setlength{\parindent}{1cm}#1 \Qed}
+
+
+% deliminators
+
+\NewDocumentCommand\xDeclarePairedDelimiter{mmm}
+ {%
+  \NewDocumentCommand#1{som}{%
+   \IfNoValueTF{##2}
+    {\IfBooleanTF{##1}{#2##3#3}{\left#2##3\right#3}}
+    {\mathopen{##2#2}##3\mathclose{##2#3}}%
+  }%
+}
+
+\xDeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+\xDeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\xDeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\xDeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\xDeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\xDeclarePairedDelimiter{\round}{\lfloor}{\rceil}
+
