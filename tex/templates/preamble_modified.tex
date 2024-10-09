@@ -181,6 +181,59 @@
 
 
 %================================
+% FAKT
+%================================
+
+\newcounter{fact} \numberwithin{fact}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=chapter, use counter=fact]{fact}{Fakt}
+{%
+	enhanced,
+	breakable,
+	colback = white,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{black},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = black,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mylemmafr},
+}
+{th}
+
+
+%================================
+% NOTATION
+%================================
+
+\newcounter{notation} \numberwithin{notation}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=chapter, use counter=notation]{notation}{Notation}
+{%
+	enhanced,
+	breakable,
+	colback = white,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{black},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = black,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mylemmafr},
+}
+{th}
+
+%================================
 % BEHAUPTUNG
 %================================
 
@@ -290,9 +343,9 @@
 % EXAMPLE BOX
 %================================
 
-\newcounter{example} \numberwithin{example}{chapter}
+\newcounter{ex} \numberwithin{ex}{chapter}
 
-\newtcbtheorem[number within=chapter, use counter=example]{Example}{Beispiel}
+\newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}
 {%
 	colback = myexamplebg
 	,breakable
@@ -314,9 +367,9 @@
 % DEFINITION BOX
 %================================
 
-\newcounter{definition} \numberwithin{definition}{chapter}
+\newcounter{dfn} \numberwithin{dfn}{chapter}
 
-\newtcbtheorem[number within=chapter, use counter=definition]{Definition}{Definition}{enhanced,
+\newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{enhanced,
     colbacktitle=red!75!black,
 	before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
     breakable,
@@ -345,7 +398,7 @@
 %================================
 
 \makeatletter
-\newtcbtheorem{question}{Question}{enhanced,
+\newtcbtheorem{question}{Frage}{enhanced,
 	breakable,
 	colback=white,
 	colframe=myb!80!black,
@@ -403,7 +456,7 @@
 %================================
 
 \makeatletter
-\newtcbtheorem{qstion}{Question}{enhanced,
+\newtcbtheorem{qstion}{Frage}{enhanced,
 	breakable,
 	colback=white,
 	colframe=mygr,
@@ -454,21 +507,23 @@
 % NOTE BOX
 %================================
 
+\newcounter{nt} \numberwithin{nt}{chapter}
+
 \usetikzlibrary{arrows,calc,shadows.blur}
 \tcbuselibrary{skins}
-\newtcolorbox{note}[1][]{%
+\newtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{
 	enhanced jigsaw,
 	colback=gray!20!white,%
 	colframe=gray!80!black,
 	size=small,
 	boxrule=1pt,
-	title=\textbf{Note:-},
+	title=\textbf{Bemerkung:},
 	halign title=flush center,
 	coltitle=black,
 	breakable,
 	drop shadow=black!50!white,
 	attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
-	minipage boxed title=1.5cm,
+	minipage boxed title=2.5cm,
 	boxed title style={%
 			colback=white,
 			size=fbox,
@@ -487,8 +542,9 @@
 					\end{scope}
 				},
 		},
-	#1,
-}
+	#1
+}{def}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SELF MADE COMMANDS
@@ -498,10 +554,12 @@
 \newcommand{\dfn}[2]{\begin{Definition}{#1}{}#2\end{Definition}}
 \newcommand{\clm}[2]{\begin{claim}{#1}{}#2\end{claim}}
 \newcommand{\lemma}[2]{\begin{mlemma}{#1}{}#2\end{mlemma}}
+\newcommand{\nota}[2]{\begin{notation}{#1}{}#2\end{notation}}
+\newcommand{\fac}[2]{\begin{fact}{#1}{}#2\end{fact}}
 \newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
 \newcommand{\prop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
 \newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
-\newcommand{\nt}[1]{\begin{note}#1\end{note}}
+\newcommand{\nt}[2]{\begin{note}{#1}{}\setlength{\parindent}{1cm}#2\end{note}}
 \newcommand{\qs}[2]{\begin{question}{#1}{}#2\end{question}}
 
 \newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
