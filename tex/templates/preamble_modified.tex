@@ -89,10 +89,10 @@
 % THEOREM BOX
 %================================
 
-\newcounter{thm} \numberwithin{thm}{section}
+\newcounter{thm} \numberwithin{thm}{chapter}
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section, use counter=thm]{Theorem}{Theorem}
+\newtcbtheorem[number within=chapter, use counter=thm]{Theorem}{Theorem}
 {%
 	enhanced,
 	breakable,
@@ -263,10 +263,10 @@
 % PROPOSITION
 %================================
 
-\newcounter{prop} \numberwithin{prop}{section}
+\newcounter{prop} \numberwithin{prop}{chapter}
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section, use counter=prop]{Prop}{Proposition}
+\newtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}
 {%
 	enhanced,
 	breakable,
@@ -394,7 +394,7 @@
 
 
 %================================
-% Solution BOX
+% Question BOX
 %================================
 
 \makeatletter
@@ -546,6 +546,18 @@
 }{def}
 
 
+
+\newtcolorbox{lecturebox}[1][]{
+  colframe=black, % Border color
+  colback=gray!10, % Background color
+  width=\linewidth, 
+  sharp corners,
+  boxrule=0.5mm, % Thickness of the border
+  title={\hfill \textbf{Vorlesung vom #1} \hfill}, % Custom title for date
+  fonttitle=\bfseries,
+}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SELF MADE COMMANDS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -559,14 +571,29 @@
 \newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
 \newcommand{\prop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
 \newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
-\newcommand{\nt}[2]{\begin{note}{#1}{}\setlength{\parindent}{1cm}#2\end{note}}
+\newcommand{\nt}[2]{\begin{note}{#1}{}#2\end{note}}
 \newcommand{\qs}[2]{\begin{question}{#1}{}#2\end{question}}
+\newcommand{\solu}[2]{\begin{solution}{#1}{}#2\end{solution}}
 
 \newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
 \newcommand{\wc}[2]{\begin{wconc}{#1}{}\setlength{\parindent}{1cm}#2\end{wconc}}
 \newcommand{\thmcon}[1]{\begin{Theoremcon}{#1}\end{Theoremcon}}
 \newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
 \newcommand{\behauptung}[2]{\begin{Behauptung}{#1}{}#2\end{Behauptung}}
+
+\newcommand{\lecturedivider}[1]{
+  \vspace{1em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
+  \vspace{-1.2em}
+  \begin{center}
+    \textbf{Vorlesung vom #1} % Date centered
+  \end{center}
+  \vspace{-1.5em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Another horizontal line
+  \vspace{1em}
+}
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
@@ -694,8 +721,8 @@
 	  \vspace*{-20\p@}%
 	  \begin{tikzpicture}[remember picture, overlay]%
 		  \pgftext[right,x=15cm,y=0.2cm]{\color{doc!60}\Huge\sc\bfseries \contentsname};%
-		  \draw[fill=doc!60,draw=doc!60] (13,-.75) rectangle (20,1);%
-		  \clip (13,-.75) rectangle (20,1);
+		  \draw[fill=doc!60,draw=doc!60] (10,-.75) rectangle (20,1);%
+		  \clip (10,-.75) rectangle (20,1);
 		  \pgftext[right,x=15cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname};%
 	  \end{tikzpicture}}%
 	\@starttoc{toc}}
@@ -707,3 +734,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setlength{\jot}{0pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SIMPLE REFERENCE MAKER WITH CORRECT COUNTER %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\preplabel}[1]{
+    \addtocounter{#1}{-1}
+    \refstepcounter{#1}
+}
