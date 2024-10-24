@@ -27,20 +27,21 @@
 \usepackage{nameref}
 \usepackage{multicol,array}
 \usepackage{tikz-cd}
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+%\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 \usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
 \usepackage{import}
 \usepackage{xifthen}
 \usepackage{pdfpages}
 \usepackage{transparent}
 
+\begin{comment}
 \newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
 \SetCommentSty{mycommfont}
 \newcommand{\incfig}[1]{%
     \def\svgwidth{\columnwidth}
     \import{./figures/}{#1.pdf_tex}
 }
-
+\end{comment}
 \usepackage{tikzsymbols}
 %\renewcommand\qedsymbol{$\Laughey$}
 
@@ -62,8 +63,9 @@
 \definecolor{myr}{RGB}{199, 68, 64}
 \definecolor{mytheorembg}{HTML}{F2F2F9}
 \definecolor{mytheoremfr}{HTML}{00007B}
-\definecolor{mylemmabg}{HTML}{FFFAF8}
-\definecolor{mylemmafr}{HTML}{983b0f}
+\definecolor{mylemmabg}{HTML}{E3F2FD}
+\definecolor{mylemmafr}{HTML}{1E96FC}
+\definecolor{mytheobg}{HTML}{FFFAF8}
 \definecolor{mypropbg}{HTML}{f2fbfc}
 \definecolor{mypropfr}{HTML}{191971}
 \definecolor{myexamplebg}{HTML}{F2FBF8}
@@ -211,10 +213,10 @@
 % NOTATION
 %================================
 
-\newcounter{notation} \numberwithin{notation}{chapter}
+\newcounter{nota} \numberwithin{nota}{chapter}
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=chapter, use counter=notation]{notation}{Notation}
+\newtcbtheorem[number within=chapter, use counter=nota]{notation}{Notation}
 {%
 	enhanced,
 	breakable,
@@ -243,7 +245,7 @@
 {%
 	enhanced,
 	breakable,
-	colback = mylemmabg,
+	colback = mytheobg,
 	frame hidden,
 	boxrule = 0sp,
 	borderline west = {2pt}{0pt}{mylemmafr},
@@ -348,9 +350,9 @@
 \newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}
 {%
 	colback = myexamplebg
-	,breakable
 	,colframe = myexamplefr
 	,coltitle = myexampleti
+	,breakable
 	,boxrule = 1pt
 	,sharp corners
 	,detach title
@@ -433,7 +435,7 @@
 	colback=white,
 	colframe=myg!80!black,
 	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
-	title=Solution,
+	title=Lösung,
 	boxed title size=title,
 	boxed title style={%
 			sharp corners,
@@ -529,19 +531,17 @@
 			size=fbox,
 			boxrule=1pt,
 			boxsep=2pt,
+            drop shadow=black!50!white,
 			underlay={%
 					\coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
 					\coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
-					\begin{scope}
-						\clip (interior.north west) rectangle ([xshift=3ex]interior.east);
-						\filldraw [white, blur shadow={shadow opacity=60, shadow yshift=-.75ex}, rounded corners=2pt] (interior.north west) rectangle (interior.south east);
-					\end{scope}
 					\begin{scope}[gray!80!black]
 						\fill (dotA) circle (2pt);
 						\fill (dotB) circle (2pt);
 					\end{scope}
 				},
 		},
+        before upper = \par\smallskip\hspace{7.5pt}
 	#1
 }{def}
 
@@ -581,13 +581,13 @@
 \newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
 \newcommand{\behauptung}[2]{\begin{Behauptung}{#1}{}#2\end{Behauptung}}
 
-\newcommand{\lecturedivider}[1]{
+\newcommand{\lecturedivider}[2]{
   \vspace{1em}
   \noindent
   \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
   \vspace{-1.2em}
   \begin{center}
-    \textbf{Vorlesung vom #1} % Date centered
+    \textbf{#1. Vorlesung - #2} % Date centered
   \end{center}
   \vspace{-1.5em}
   \noindent
@@ -698,7 +698,7 @@
 	\end{tikzpicture}\color{doc!60}\large\sc\bfseries}%
 {}
 {}
-{\;\titlerule\;\large\sc\bfseries \pagename \thecontentspage
+{\;\titlerule\;\large\sc\bfseries \pagename\ \thecontentspage
 	\begin{tikzpicture}[remember picture, overlay]
 		\draw[fill=doc!60,draw=doc!60] (2pt,0) rectangle (4,0.1pt);
 	\end{tikzpicture}}%
