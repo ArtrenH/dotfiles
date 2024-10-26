@@ -58,100 +58,51 @@
 \setlength{\parindent}{1cm}
 \input{~/dotfiles/tex/templates/theorems.tex}
 
+\tcbuselibrary{theorems,skins,hooks}
 
 % THEOREM BOX
 \newcounter{thm} \numberwithin{thm}{chapter}
-\tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[number within=chapter, use counter=thm]{Theorem}{Theorem}{Theorem style}{th}
-
-\tcbuselibrary{theorems,skins,hooks}
 \newtcolorbox{Theoremcon}{Theoremcon style}
-
 
 % Corollery
 \newcounter{cor} \numberwithin{cor}{chapter}
-
-\tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[number within=chapter, use counter=cor]{Corollary}{Korollar}{Corollary style}{th}
-
 
 % LEMMA
 \newcounter{lemma} \numberwithin{lemma}{chapter}
-
-\tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[number within=chapter, use counter=lemma]{mlemma}{Lemma}{Lemma style}{th}
-
 
 % FAKT
 \newcounter{fact} \numberwithin{fact}{chapter}
-\tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[number within=chapter, use counter=fact]{fact}{Fakt}{Fact style}{th}
-
 
 % NOTATION
 \newcounter{nota} \numberwithin{nota}{chapter}
-\tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[number within=chapter, use counter=nota]{notation}{Notation}{Fact style}{th}
 
-
 % BEHAUPTUNG
-\tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
-
 
 % PROPOSITION
 \newcounter{prop} \numberwithin{prop}{chapter}
-\tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}{Prop style}{th}
-
+\tcbuselibrary{theorems,skins,hooks}\newtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}{Prop style}{th}
 
 % CLAIM BOX
 \newcounter{clm} \numberwithin{clm}{chapter}
-
 \newtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}{claim style}{th}
-
 
 % EXERCISE BOX
 \tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[number within=section]{Exercise}{Exercise}{Exercise style}{th}
 
-
 % EXAMPLE BOX
 \newcounter{ex} \numberwithin{ex}{chapter}
 \newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
 
-
 % DEFINITION BOX
 \newcounter{dfn} \numberwithin{dfn}{chapter}
 \newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
-
-
-% Question BOX
-\makeatletter
-\newtcbtheorem{question}{Frage}{enhanced,
-	breakable,
-	colback=white,
-	colframe=myb!80!black,
-	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
-	fonttitle=\bfseries,
-	boxed title size=title,
-	boxed title style={%
-			sharp corners,
-			rounded corners=northwest,
-			colback=tcbcolframe,
-			boxrule=0pt,
-		},
-	underlay boxed title={%
-			\path[fill=tcbcolframe] (title.south west)--(title.south east)
-			to[out=0, in=180] ([xshift=5mm]title.east)--
-			(title.center-|frame.east)
-			[rounded corners=\kvtcb@arc] |-
-			(frame.north) -| cycle;
-		},
-	#1
-}{def}
-\makeatother
-
 
 % SOLUTION BOX
 \makeatletter
@@ -181,13 +132,12 @@
 
 % QUESTION BOX
 \makeatletter
-\newtcbtheorem{qstion}{Frage}{enhanced,
+\newtcbtheorem{question}{Frage}{enhanced,
 	breakable,
 	colback=white,
-	colframe=mygr,
+	colframe=myb!80!black,
 	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
 	fonttitle=\bfseries,
-	title={#2},
 	boxed title size=title,
 	boxed title style={%
 			sharp corners,
@@ -229,9 +179,7 @@
 
 % NOTE BOX
 \newcounter{nt} \numberwithin{nt}{chapter}
-
 \usetikzlibrary{arrows,calc,shadows.blur}
-\tcbuselibrary{skins}
 \newtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{Note style}{def}
 
 
