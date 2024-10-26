@@ -1,0 +1,269 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SELF MADE COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\definecolor{myg}{RGB}{56, 140, 70}
+\definecolor{myb}{RGB}{45, 111, 177}
+\definecolor{myr}{RGB}{199, 68, 64}
+\definecolor{mytheorembg}{HTML}{F2F2F9}
+\definecolor{mytheoremfr}{HTML}{00007B}
+\definecolor{mylemmabg}{HTML}{E3F2FD}
+\definecolor{mylemmafr}{HTML}{1E96FC}
+\definecolor{mytheobg}{HTML}{FFFAF8}
+\definecolor{mypropbg}{HTML}{f2fbfc}
+\definecolor{mypropfr}{HTML}{191971}
+\definecolor{myexamplebg}{HTML}{F2FBF8}
+\definecolor{myexamplefr}{HTML}{88D6D1}
+\definecolor{myexampleti}{HTML}{2A7F7F}
+\definecolor{mydefinitbg}{HTML}{E5E5FF}
+\definecolor{mydefinitfr}{HTML}{3F3FA3}
+\definecolor{notesgreen}{RGB}{0,162,0}
+\definecolor{myp}{RGB}{197, 92, 212}
+\definecolor{mygr}{HTML}{2C3338}
+\definecolor{myred}{RGB}{127,0,0}
+\definecolor{myyellow}{RGB}{169,121,69}
+\definecolor{myexercisebg}{HTML}{F2FBF8}
+\definecolor{myexercisefg}{HTML}{88D6D1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BOX STYLE DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tcbset{Theorem style/.style={
+        breakable,
+        colback = mytheorembg,
+        frame hidden,
+        boxrule = 0sp,
+        borderline west = {2pt}{0pt}{mytheoremfr},
+        sharp corners,
+        detach title,
+        before upper = \tcbtitle\par\smallskip,
+        coltitle = mytheoremfr,
+        fonttitle = \bfseries\sffamily,
+        description font = \mdseries,
+        separator sign none,
+        segmentation style={solid, mytheoremfr},
+    }
+}
+
+\tcbset{Theoremcon style/.style={
+        enhanced
+        ,breakable
+        ,colback = mytheorembg
+        ,frame hidden
+        ,boxrule = 0sp
+        ,borderline west = {2pt}{0pt}{mytheoremfr}
+        ,sharp corners
+        ,description font = \mdseries
+        ,separator sign none
+    }
+}
+
+
+\tcbset{Corollary style/.style={
+        enhanced
+        ,breakable
+        ,colback = myp!10
+        ,frame hidden
+        ,boxrule = 0sp
+        ,borderline west = {2pt}{0pt}{myp!85!black}
+        ,sharp corners
+        ,detach title
+        ,before upper = \tcbtitle\par\smallskip
+        ,coltitle = myp!85!black
+        ,fonttitle = \bfseries\sffamily
+        ,description font = \mdseries
+        ,separator sign none
+        ,segmentation style={solid, myp!85!black}
+    }
+}
+
+\tcbset{Lemma style/.style={
+        enhanced,
+        breakable,
+        colback = mylemmabg,
+        frame hidden,
+        boxrule = 0sp,
+        borderline west = {2pt}{0pt}{mylemmafr},
+        sharp corners,
+        detach title,
+        before upper = \tcbtitle\par\smallskip,
+        coltitle = mylemmafr,
+        fonttitle = \bfseries\sffamily,
+        description font = \mdseries,
+        separator sign none,
+        segmentation style={solid, mylemmafr},
+    }
+}
+
+\tcbset{Fact style/.style={
+        enhanced,
+        breakable,
+        colback = white,
+        frame hidden,
+        boxrule = 0sp,
+        borderline west = {2pt}{0pt}{black},
+        sharp corners,
+        detach title,
+        before upper = \tcbtitle\par\smallskip,
+        coltitle = black,
+        fonttitle = \bfseries\sffamily,
+        description font = \mdseries,
+        separator sign none,
+        segmentation style={solid, mylemmafr},
+    }
+}
+
+\tcbset{Notation style/.style={
+    % same as fact style
+    }
+}
+
+\tcbset{Behauptung style/.style={
+        enhanced,
+        breakable,
+        colback = mytheobg,
+        frame hidden,
+        boxrule = 0sp,
+        borderline west = {2pt}{0pt}{mylemmafr},
+        sharp corners,
+        detach title,
+        before upper = \tcbtitle\par\smallskip,
+        coltitle = mylemmafr,
+        fonttitle = \bfseries\sffamily,
+        description font = \mdseries,
+        separator sign none,
+        segmentation style={solid, mylemmafr},
+    }
+}
+
+\tcbset{Prop style/.style={
+        enhanced,
+        breakable,
+        colback = mypropbg,
+        frame hidden,
+        boxrule = 0sp,
+        borderline west = {2pt}{0pt}{mypropfr},
+        sharp corners,
+        detach title,
+        before upper = \tcbtitle\par\smallskip,
+        coltitle = mypropfr,
+        fonttitle = \bfseries\sffamily,
+        description font = \mdseries,
+        separator sign none,
+        segmentation style={solid, mypropfr},
+    }
+}
+
+\tcbset{claim style/.style={
+        enhanced
+        ,breakable
+        ,colback = myg!10
+        ,frame hidden
+        ,boxrule = 0sp
+        ,borderline west = {2pt}{0pt}{myg}
+        ,sharp corners
+        ,detach title
+        ,before upper = \tcbtitle\par\smallskip
+        ,coltitle = myg!85!black
+        ,fonttitle = \bfseries\sffamily
+        ,description font = \mdseries
+        ,separator sign none
+        ,segmentation style={solid, myg!85!black}
+    }
+}
+
+\tcbset{Exercise style/.style={
+        enhanced,
+        breakable,
+        colback = myexercisebg,
+        frame hidden,
+        boxrule = 0sp,
+        borderline west = {2pt}{0pt}{myexercisefg},
+        sharp corners,
+        detach title,
+        before upper = \tcbtitle\par\smallskip,
+        coltitle = myexercisefg,
+        fonttitle = \bfseries\sffamily,
+        description font = \mdseries,
+        separator sign none,
+        segmentation style={solid, myexercisefg},
+    }
+}
+
+\tcbset{Example style/.style={
+        colback = myexamplebg
+        ,colframe = myexamplefr
+        ,coltitle = myexampleti
+        ,breakable
+        ,boxrule = 1pt
+        ,sharp corners
+        ,detach title
+        ,before upper=\tcbtitle\par\smallskip
+        ,fonttitle = \bfseries
+        ,description font = \mdseries
+        ,separator sign none
+        ,description delimiters parenthesis
+    }
+}
+
+\tcbset{Definition style/.style={
+        enhanced,
+        colbacktitle=red!75!black,
+        before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
+        breakable,
+        attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
+        boxed title style={frame code={
+                        \path[fill=tcbcolback]
+                        ([yshift=-1mm,xshift=-1mm]frame.north west)
+                        arc[start angle=0,end angle=180,radius=1mm]
+                        ([yshift=-1mm,xshift=1mm]frame.north east)
+                        arc[start angle=180,end angle=0,radius=1mm];
+                        \path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+                            middle color=tcbcolback!80!black]
+                        ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+                        [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+                        -- (frame.south east) -- (frame.south west)
+                        -- ([xshift=-1mm,yshift=-1mm]frame.north west)
+                        [sharp corners]-- cycle;
+                    },interior engine=empty,
+            },
+        fonttitle=\bfseries,
+    }
+}
+
+
+\tcbset{Note style/.style={
+        enhanced jigsaw,
+        colback=gray!20!white,%
+        colframe=gray!80!black,
+        size=small,
+        boxrule=1pt,
+        title=\textbf{Bemerkung:},
+        halign title=flush center,
+        coltitle=black,
+        breakable,
+        drop shadow=black!50!white,
+        attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+        minipage boxed title=2.5cm,
+        boxed title style={%
+                colback=white,
+                size=fbox,
+                boxrule=1pt,
+                boxsep=2pt,
+                drop shadow=black!50!white,
+                underlay={%
+                        \coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+                        \coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+                        \begin{scope}[gray!80!black]
+                            \fill (dotA) circle (2pt);
+                            \fill (dotB) circle (2pt);
+                        \end{scope}
+                    },
+            },
+            before upper = \par\smallskip\hspace{7.5pt}
+        #1
+    }
+}
