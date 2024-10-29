@@ -60,49 +60,126 @@
 
 \tcbuselibrary{theorems,skins,hooks}
 
-% THEOREM BOX
-\newcounter{thm} \numberwithin{thm}{chapter}
-\newtcbtheorem[number within=chapter, use counter=thm]{Theorem}{Theorem}{Theorem style}{th}
-\newtcolorbox{Theoremcon}{Theoremcon style}
 
-% Corollery
-\newcounter{cor} \numberwithin{cor}{chapter}
-\newtcbtheorem[number within=chapter, use counter=cor]{Corollary}{Korollar}{Corollary style}{th}
+\newcommand{\standardBoxes}{
+    % THEOREM BOX
+    \newcounter{thm} \numberwithin{thm}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=thm]{Theorem}{Theorem}{Theorem style}{th}
+    \newtcolorbox{Theoremcon}{Theoremcon style}
 
-% LEMMA
-\newcounter{lemma} \numberwithin{lemma}{chapter}
-\newtcbtheorem[number within=chapter, use counter=lemma]{mlemma}{Lemma}{Lemma style}{th}
+    % Corollery
+    \newcounter{cor} \numberwithin{cor}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=cor]{Corollary}{Korollar}{Corollary style}{th}
 
-% FAKT
-\newcounter{fact} \numberwithin{fact}{chapter}
-\newtcbtheorem[number within=chapter, use counter=fact]{fact}{Fakt}{Fact style}{th}
+    % LEMMA
+    \newcounter{lemma} \numberwithin{lemma}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=lemma]{mlemma}{Lemma}{Lemma style}{th}
 
-% NOTATION
-\newcounter{nota} \numberwithin{nota}{chapter}
-\newtcbtheorem[number within=chapter, use counter=nota]{notation}{Notation}{Fact style}{th}
+    % FAKT
+    \newcounter{fact} \numberwithin{fact}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=fact]{fact}{Fakt}{Fact style}{th}
 
-% BEHAUPTUNG
-\newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
+    % NOTATION
+    \newcounter{nota} \numberwithin{nota}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=nota]{notation}{Notation}{Fact style}{th}
 
-% PROPOSITION
-\newcounter{prop} \numberwithin{prop}{chapter}
-\tcbuselibrary{theorems,skins,hooks}\newtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}{Prop style}{th}
+    % BEHAUPTUNG
+    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
 
-% CLAIM BOX
-\newcounter{clm} \numberwithin{clm}{chapter}
-\newtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}{claim style}{th}
+    % PROPOSITION
+    \newcounter{prop} \numberwithin{prop}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}{Prop style}{th}
 
-% EXERCISE BOX
-\tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section]{Exercise}{Exercise}{Exercise style}{th}
+    % CLAIM BOX
+    \newcounter{clm} \numberwithin{clm}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}{claim style}{th}
 
-% EXAMPLE BOX
-\newcounter{ex} \numberwithin{ex}{chapter}
-\newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
+    % EXERCISE BOX
+    \newtcbtheorem[number within=section]{Exercise}{Exercise}{Exercise style}{th}
 
-% DEFINITION BOX
-\newcounter{dfn} \numberwithin{dfn}{chapter}
-\newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+    % EXAMPLE BOX
+    \newcounter{ex} \numberwithin{ex}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
+
+    % DEFINITION BOX
+    \newcounter{dfn} \numberwithin{dfn}{chapter}
+    \newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+
+    % NOTE BOX
+    \newcounter{nt} \numberwithin{nt}{chapter}
+    \usetikzlibrary{arrows,calc,shadows.blur}
+    \newtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{Note style}{def}
+}
+
+\newcommand{\AnaBoxes}{
+    \usetikzlibrary{arrows,calc,shadows.blur}
+    \newcounter{boxCounter} \numberwithin{boxCounter}{chapter}
+    \newcounter{dfn} \numberwithin{dfn}{chapter}
+
+    \newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+    \newtcbtheorem[number within=chapter, use counter=boxCounter]{claim}{Satz}{claim style}{th}
+    \newtcbtheorem[number within=chapter, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
+    \newtcbtheorem[number within=chapter, use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
+    \newtcbtheorem[number within=chapter, use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
+    \newtcbtheorem[number within=chapter, use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
+
+    \newtcbtheorem[no counter]{note}{Bemerkung}{Note style}{def}
+    \newtcbtheorem[no counter]{Example}{Beispiel}{Example style}{ex}
+    \newtcbtheorem[number within=chapter, use counter=boxCounter]{notation}{Notation}{Fact style}{th}
+    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
+
+    \newtcbtheorem[number within=chapter, use counter=boxCounter]{Theorem}{Theorem}{Theorem style}{th}
+    \newtcolorbox{Theoremcon}{Theoremcon style}
+
+    \newtcbtheorem[number within=chapter]{Exercise}{Exercise}{Exercise style}{th}
+}
+
+\newcommand{\EinfAlgBoxes}{
+    \usetikzlibrary{arrows,calc,shadows.blur}
+    \newcounter{boxCounter} \numberwithin{boxCounter}{section}
+
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Definition}{Definition}{Definition style}{def}
+    \newcounter{clm} \numberwithin{clm}{section}
+    \newtcbtheorem[number within=section, use counter=clm]{claim}{Satz}{claim style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
+    \newcounter{prop} \numberwithin{prop}{section}
+    \newtcbtheorem[number within=section, use counter=prop]{Prop}{Proposition}{Prop style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
+
+    \newtcbtheorem[number within=section, use counter=boxCounter]{note}{Bemerkung}{Note style}{def}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Example}{Beispiel}{Example style}{ex}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{notation}{Notation}{Fact style}{th}
+    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
+
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Theorem}{Theorem}{Theorem style}{th}
+    \newtcolorbox{Theoremcon}{Theoremcon style}
+
+    \newtcbtheorem[number within=section]{Exercise}{Exercise}{Exercise style}{th}
+}
+
+\newcommand{\edmBoxes}{
+    \usetikzlibrary{arrows,calc,shadows.blur}
+    \newcounter{boxCounter}
+
+    \newtcbtheorem[no counter]{Definition}{Definition}{Definition style}{def}
+    \newtcbtheorem[use counter=boxCounter]{claim}{Satz}{claim style}{th}
+    \newtcbtheorem[use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
+    \newtcbtheorem[use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
+    \newtcbtheorem[use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
+    \newtcbtheorem[use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
+
+    \newtcbtheorem[no counter]{note}{Bemerkung}{Note style}{def}
+    \newtcbtheorem[no counter]{Example}{Beispiel}{Example style}{ex}
+    \newtcbtheorem[no counter]{notation}{Notation}{Fact style}{th}
+    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
+
+    \newtcbtheorem[]{Theorem}{Theorem}{Theorem style}{th}
+    \newtcolorbox{Theoremcon}{Theoremcon style}
+
+    \newtcbtheorem[]{Exercise}{Exercise}{Exercise style}{th}
+}
+
 
 % SOLUTION BOX
 \makeatletter
@@ -128,7 +205,6 @@
 		},
 }
 \makeatother
-
 
 % QUESTION BOX
 \makeatletter
@@ -175,12 +251,6 @@
 		},
 	#1
 }{def}
-
-
-% NOTE BOX
-\newcounter{nt} \numberwithin{nt}{chapter}
-\usetikzlibrary{arrows,calc,shadows.blur}
-\newtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{Note style}{def}
 
 
 % LECTURE BOX
