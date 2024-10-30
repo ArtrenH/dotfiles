@@ -216,20 +216,21 @@
         before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
         breakable,
         attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
-        boxed title style={frame code={
-                        \path[fill=tcbcolback]
-                        ([yshift=-1mm,xshift=-1mm]frame.north west)
-                        arc[start angle=0,end angle=180,radius=1mm]
-                        ([yshift=-1mm,xshift=1mm]frame.north east)
-                        arc[start angle=180,end angle=0,radius=1mm];
-                        \path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
-                            middle color=tcbcolback!80!black]
-                        ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
-                        [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
-                        -- (frame.south east) -- (frame.south west)
-                        -- ([xshift=-1mm,yshift=-1mm]frame.north west)
-                        [sharp corners]-- cycle;
-                    },interior engine=empty,
+        boxed title style={
+                frame code={
+                    \path[fill=tcbcolback]
+                    ([yshift=-1mm,xshift=-1mm]frame.north west)
+                    arc[start angle=0,end angle=180,radius=1mm]
+                    ([yshift=-1mm,xshift=1mm]frame.north east)
+                    arc[start angle=180,end angle=0,radius=1mm];
+                    \path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+                        middle color=tcbcolback!80!black]
+                    ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+                    [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+                    -- (frame.south east) -- (frame.south west)
+                    -- ([xshift=-1mm,yshift=-1mm]frame.north west)
+                    [sharp corners]-- cycle;
+                },interior engine=empty,
             },
         fonttitle=\bfseries,
     }
@@ -238,33 +239,28 @@
 
 \tcbset{Note style/.style={
         enhanced jigsaw,
-        colback=gray!20!white,%
+        colback=gray!20!white,
         colframe=gray!80!black,
-        size=small,
         boxrule=1pt,
-        title=\textbf{Bemerkung:},
         halign title=flush center,
         coltitle=black,
         breakable,
         drop shadow=black!50!white,
         attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
-        minipage boxed title=3cm,
-        boxed title style={%
+        boxed title style={
                 colback=white,
-                size=fbox,
                 boxrule=1pt,
                 boxsep=2pt,
                 drop shadow=black!50!white,
-                underlay={%
-                        \coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
-                        \coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
-                        \begin{scope}[gray!80!black]
-                            \fill (dotA) circle (2pt);
-                            \fill (dotB) circle (2pt);
-                        \end{scope}
-                    },
+                underlay={
+                    \coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+                    \coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+                    \begin{scope}[gray!80!black]
+                        \fill (dotA) circle (2pt);
+                        \fill (dotB) circle (2pt);
+                    \end{scope}
+                },
             },
-            before upper = \par\smallskip\hspace{7.5pt}
         #1
     }
 }
