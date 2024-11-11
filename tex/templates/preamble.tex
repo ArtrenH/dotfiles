@@ -26,8 +26,7 @@
 %\usepackage{authblk}
 \usepackage{nameref}
 \usepackage{multicol,array}
-\usepackage{tikz-cd}
-%\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage[ruled, vlined, linesnumbered, german]{algorithm2e}
 \usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
 \usepackage{import}
 \usepackage{xifthen}
@@ -143,8 +142,7 @@
     \newtcbtheorem[number within=section, use counter=clm]{claim}{Satz}{claim style}{th}
     \newtcbtheorem[number within=section, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
     \newtcbtheorem[number within=section, use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
-    \newcounter{prop} \numberwithin{prop}{section}
-    \newtcbtheorem[number within=section, use counter=prop]{Prop}{Proposition}{Prop style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
     \newtcbtheorem[number within=section, use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
 
     \newtcbtheorem[number within=section, use counter=boxCounter]{note}{Bemerkung}{Note style}{def}
@@ -278,34 +276,30 @@
 }{def}
 
 
-% LECTURE BOX
-\newtcolorbox{lecturebox}[1][]{
-  colframe=black, % Border color
-  colback=gray!10, % Background color
-  width=\linewidth, 
-  sharp corners,
-  boxrule=0.5mm, % Thickness of the border
-  title={\hfill \textbf{Vorlesung vom #1} \hfill}, % Custom title for date
-  fonttitle=\bfseries,
-}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SELF MADE COMMANDS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \newcommand{\dfn}[2]{\begin{Definition}{#1}{}#2\end{Definition}}
+\newcommand{\dfnstar}[2]{\begin{Definition*}{#1}{}#2\end{Definition*}}
 \newcommand{\clm}[2]{\begin{claim}{#1}{}#2\end{claim}}
+\newcommand{\clmstar}[2]{\begin{claim*}{#1}{}#2\end{claim*}}
 \newcommand{\lemma}[2]{\begin{mlemma}{#1}{}#2\end{mlemma}}
 \newcommand{\nota}[2]{\begin{notation}{#1}{}#2\end{notation}}
+\newcommand{\notastar}[2]{\begin{notation*}{#1}{}#2\end{notation*}}
 \newcommand{\fac}[2]{\begin{fact}{#1}{}#2\end{fact}}
 \newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
 \newcommand{\prop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
+\newcommand{\propstar}[2]{\begin{Prop*}{#1}{}#2\end{Prop*}}
 \newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
+\newcommand{\exstar}[2]{\begin{Example*}{#1}{}#2\end{Example*}}
 \newcommand{\nt}[2]{\begin{note}{#1}{}#2\end{note}}
+\newcommand{\ntstar}[2]{\begin{note*}{#1}{}#2\end{note*}}
 \newcommand{\qs}[2]{\begin{question}{#1}{}#2\end{question}}
+\newcommand{\qsstar}[2]{\begin{question*}{#1}{}#2\end{question*}}
 \newcommand{\prob}[2]{\begin{problem}{#1}{}#2\end{problem}}
+\newcommand{\probstar}[2]{\begin{problem*}{#1}{}#2\end{problem*}}
 \newcommand{\solu}[2]{\begin{solution}{#1}{}#2\end{solution}}
 
 \newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
@@ -321,6 +315,21 @@
   \vspace{-1.2em}
   \begin{center}
     \textbf{#1. Vorlesung - #2} % Date centered
+  \end{center}
+  \vspace{-1.5em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Another horizontal line
+  \vspace{1em}
+}
+
+
+\newcommand{\basicdivider}[1]{
+  \vspace{1em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
+  \vspace{-1.2em}
+  \begin{center}
+    \textbf{#1} % Date centered
   \end{center}
   \vspace{-1.5em}
   \noindent
