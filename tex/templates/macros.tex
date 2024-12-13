@@ -73,6 +73,13 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\PSL}{PSL}
 \DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\Prim}{Prim}
+\DeclareMathOperator{\kin}{kin}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\val}{val}
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
 
 \newcommand{\eps}{\epsilon}
 \newcommand{\veps}{\varepsilon}
@@ -81,6 +88,7 @@
 \newcommand{\wt}{\widetilde}
 \newcommand{\wh}{\widehat}
 \newcommand{\vocab}[1]{\textbf{\color{blue} #1}}
+\newcommand{\cev}[1]{\overleftarrow{#1}}
 \providecommand{\half}{\frac{1}{2}}
 \newcommand{\dang}{\measuredangle} %% Directed angle
 \newcommand{\ray}[1]{\overrightarrow{#1}}
@@ -95,7 +103,7 @@
 \newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
 \newcommand{\symprod}{\prod_{\mathrm{sym}}}
 \newcommand{\Qed}{\begin{flushright}\qed\end{flushright}}
-\newcommand{\parinn}{\setlength{\parindent}{1cm}}
+\newcommand{\parinn}{\setlength{\parindent}{0.5cm}}
 \newcommand{\parinf}{\setlength{\parindent}{0cm}}
 % \newcommand{\norm}{\|\cdot\|}
 \newcommand{\inorm}{\norm_{\infty}}
@@ -117,8 +125,8 @@
 \newcommand{\st}{\strut}
 \newcommand{\dps}[1]{\displaystyle{#1}}
 
-\newcommand{\sol}{\setlength{\parindent}{0cm}\textbf{\textit{Solution:}}\setlength{\parindent}{1cm} }
-\newcommand{\solve}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Solution: }}\setlength{\parindent}{1cm}#1 \Qed}
+\newcommand{\sol}{\textbf{\textit{Solution:}}}
+\newcommand{\solve}[1]{\textbf{\textit{Solution: }}#1 \Qed}
 \newcommand{\trianglerightneq}{\mathrel{\ooalign{\raisebox{-0.5ex}{\reflectbox{\rotatebox{90}{$\nshortmid$}}}\cr$\triangleright$\cr}\mkern-3mu}}
 \newcommand{\triangleleftneq}{\mathrel{\reflectbox{$\trianglerightneq$}}}
 
