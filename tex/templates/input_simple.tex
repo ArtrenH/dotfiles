@@ -1,0 +1,326 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGE IMPORTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage[tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=2cm,footskip=.2in]{geometry}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
+\usepackage[varbb]{newpxmath}
+\usepackage{xfrac}
+\usepackage[makeroom]{cancel}
+\usepackage{mathtools}
+\usepackage{bookmark}
+\usepackage{enumitem}
+\usepackage{hyperref,theoremref}
+\hypersetup{
+	pdftitle={Assignment},
+	colorlinks=true, linkcolor=doc!90,
+	bookmarksnumbered=true,
+	bookmarksopen=true
+}
+\usepackage[most,many,breakable]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{varwidth}
+\usepackage{varwidth}
+\usepackage{etoolbox}
+%\usepackage{authblk}
+\usepackage{nameref}
+\usepackage{multicol,array}
+\usepackage[ruled, vlined, linesnumbered, german]{algorithm2e}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\usepackage{tikzsymbols}
+%\renewcommand\qedsymbol{$\Laughey$}
+
+
+\input{~/dotfiles/tex/templates/theorems.tex}
+
+\tcbuselibrary{theorems,skins,hooks}
+
+
+% THEOREM BOX
+\newcounter{thm} \numberwithin{thm}{chapter}
+\newtcbtheorem[number within=chapter, use counter=thm]{Theorem}{Theorem}{Theorem style}{th}
+\newtcolorbox{Theoremcon}{Theoremcon style}
+
+% Corollery
+\newcounter{cor} \numberwithin{cor}{chapter}
+\newtcbtheorem[number within=chapter, use counter=cor]{Corollary}{Korollar}{Corollary style}{th}
+
+% LEMMA
+\newcounter{lemma} \numberwithin{lemma}{chapter}
+\newtcbtheorem[number within=chapter, use counter=lemma]{mlemma}{Lemma}{Lemma style}{th}
+
+% FAKT
+\newcounter{fact} \numberwithin{fact}{chapter}
+\newtcbtheorem[number within=chapter, use counter=fact]{fact}{Fakt}{Fact style}{th}
+
+% NOTATION
+\newcounter{nota} \numberwithin{nota}{chapter}
+\newtcbtheorem[number within=chapter, use counter=nota]{notation}{Notation}{Fact style}{th}
+
+% BEHAUPTUNG
+\newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
+
+% PROPOSITION
+\newcounter{prop} \numberwithin{prop}{chapter}
+\newtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}{Prop style}{th}
+
+% CLAIM BOX
+\newcounter{clm} \numberwithin{clm}{chapter}
+\newtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}{claim style}{th}
+
+% EXERCISE BOX
+\newtcbtheorem[number within=section]{Exercise}{Exercise}{Exercise style}{th}
+
+% EXAMPLE BOX
+\newcounter{ex} \numberwithin{ex}{chapter}
+\newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
+
+% DEFINITION BOX
+\newcounter{dfn} \numberwithin{dfn}{chapter}
+\newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+
+% NOTE BOX
+\newcounter{nt} \numberwithin{nt}{chapter}
+\usetikzlibrary{arrows,calc,shadows.blur}
+\newtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{Note style, theorem name}{def}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SELF MADE COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\dfn}[2]{\begin{Definition}{#1}{}#2\end{Definition}}
+\newcommand{\dfnstar}[2]{\begin{Definition*}{#1}{}#2\end{Definition*}}
+\newcommand{\clm}[2]{\begin{claim}{#1}{}#2\end{claim}}
+\newcommand{\clmstar}[2]{\begin{claim*}{#1}{}#2\end{claim*}}
+\newcommand{\lemma}[2]{\begin{mlemma}{#1}{}#2\end{mlemma}}
+\newcommand{\nota}[2]{\begin{notation}{#1}{}#2\end{notation}}
+\newcommand{\notastar}[2]{\begin{notation*}{#1}{}#2\end{notation*}}
+\newcommand{\fac}[2]{\begin{fact}{#1}{}#2\end{fact}}
+\newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
+\newcommand{\corstar}[2]{\begin{Corollary*}{#1}{}#2\end{Corollary*}}
+\newcommand{\prop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
+\newcommand{\propstar}[2]{\begin{Prop*}{#1}{}#2\end{Prop*}}
+\newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
+\newcommand{\exstar}[2]{\begin{Example*}{#1}{}#2\end{Example*}}
+\newcommand{\nt}[2]{\begin{note}{#1}{}#2\end{note}}
+\newcommand{\ntstar}[2]{\begin{note*}{#1}{}#2\end{note*}}
+\newcommand{\qs}[2]{\begin{question}{#1}{}#2\end{question}}
+\newcommand{\qsstar}[2]{\begin{question*}{#1}{}#2\end{question*}}
+\newcommand{\prob}[2]{\begin{problem}{#1}{}#2\end{problem}}
+\newcommand{\probstar}[2]{\begin{problem*}{#1}{}#2\end{problem*}}
+\newcommand{\solu}[2]{\begin{solution}{#1}{}#2\end{solution}}
+\newcommand{\solustar}[2]{\begin{solution*}{#1}{}#2\end{solution*}}
+
+\newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
+\newcommand{\wc}[2]{\begin{wconc}{#1}{}#2\end{wconc}}
+\newcommand{\thmcon}[1]{\begin{Theoremcon}{#1}\end{Theoremcon}}
+\newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
+\newcommand{\behauptung}[2]{\begin{Behauptung}{#1}{}#2\end{Behauptung}}
+
+\newcommand{\lecturedivider}[2]{
+  \vspace{1em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
+  \vspace{-1.2em}
+  \begin{center}
+    \textbf{#1. Vorlesung - #2} % Date centered
+  \end{center}
+  \vspace{-1.5em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Another horizontal line
+  \vspace{1em}
+}
+
+
+\newcommand{\basicdivider}[1]{
+  \vspace{1em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
+  \vspace{-1.2em}
+  \begin{center}
+    \textbf{#1} % Date centered
+  \end{center}
+  \vspace{-1.5em}
+  \noindent
+  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Another horizontal line
+  \vspace{1em}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+\newcommand\getcurrentref[1]{%
+	\ifnumequal{\value{#1}}{0}
+	{??}
+	{\the\value{#1}}%
+}
+\newcommand{\getCurrentSectionNumber}{\getcurrentref{section}}
+\newenvironment{myproof}[1][\proofname]{%
+	\proof[\bfseries #1: ]%
+}{\endproof}
+
+\newcommand{\mclm}[2]{\begin{myclaim}[#1]#2\end{myclaim}}
+\newenvironment{myclaim}[1][\claimname]{\proof[\bfseries #1: ]}{}
+
+\newcounter{mylabelcounter}
+
+\makeatletter
+\newcommand{\setword}[2]{%
+	\phantomsection
+	#1\def\@currentlabel{\unexpanded{#1}}\label{#2}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RANDOM ZEUG %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\tikzset{
+	symbol/.style={
+			draw=none,
+			every to/.append style={
+					edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+		}
+}
+
+\newsavebox\diffdbox
+\newcommand{\slantedromand}{{\mathpalette\makesl{d}}}
+\newcommand{\makesl}[2]{%
+\begingroup
+\sbox{\diffdbox}{$\mathsurround=0pt#1\mathrm{#2}$}%
+\pdfsave
+\pdfsetmatrix{1 0 0.2 1}%
+\rlap{\usebox{\diffdbox}}%
+\pdfrestore
+\hskip\wd\diffdbox
+\endgroup
+}
+\newcommand{\dd}[1][]{\ensuremath{\mathop{}\!\ifstrempty{#1}{%
+\slantedromand\@ifnextchar^{\hspace{0.2ex}}{\hspace{0.1ex}}}%
+{\slantedromand\hspace{0.2ex}^{#1}}}}
+\ProvideDocumentCommand\dv{o m g}{%
+  \ensuremath{%
+    \IfValueTF{#3}{%
+      \IfNoValueTF{#1}{%
+        \frac{\dd #2}{\dd #3}%
+      }{%
+        \frac{\dd^{#1} #2}{\dd #3^{#1}}%
+      }%
+    }{%
+      \IfNoValueTF{#1}{%
+        \frac{\dd}{\dd #2}%
+      }{%
+        \frac{\dd^{#1}}{\dd #2^{#1}}%
+      }%
+    }%
+  }%
+}
+\providecommand*{\pdv}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}
+
+% redefinde leq and geq
+\let\oldleq\leq
+\let\oldgeq\geq
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+% % redefine matrix env to allow for alignment, use r as default
+% \renewcommand*\env@matrix[1][r]{\hskip -\arraycolsep
+%     \let\@ifnextchar\new@ifnextchar
+%     \array{*\c@MaxMatrixCols #1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLE OF CONTENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\chaptername}{Kapitel}
+\newcommand{\pagename}{Seite }
+
+\usepackage{tikz}
+\definecolor{doc}{RGB}{0,60,110}
+\usepackage{titletoc}
+\contentsmargin{0cm}
+\titlecontents{chapter}[3.7pc]
+{\addvspace{30pt}%
+	\begin{tikzpicture}[remember picture, overlay]%
+		\draw[fill=doc!60,draw=doc!60] (-7,-.1) rectangle (-0.9,.5);%
+		\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\sc\bfseries \chaptername\ \thecontentslabel}
+	\end{tikzpicture}\color{doc!60}\large\sc\bfseries}
+{}
+{}
+{\;\titlerule\;\large\sc\bfseries \pagename\ \thecontentspage
+	\begin{tikzpicture}[remember picture, overlay]
+		\draw[fill=doc!60,draw=doc!60] (2pt,0) rectangle (4,0.1pt);
+	\end{tikzpicture}}%
+\titlecontents{section}[3.7pc]
+{\addvspace{2pt}}
+{\contentslabel[\thecontentslabel]{2pc}}
+{}
+{\hfill\small \thecontentspage}
+[]
+\titlecontents*{subsection}[3.7pc]
+{\addvspace{-1pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+\renewcommand{\tableofcontents}{%
+	\chapter*{%
+	  \vspace*{-20\p@}%
+	  \begin{tikzpicture}[remember picture, overlay]
+		  \pgftext[right,x=15cm,y=0.2cm]{\color{doc!60}\Huge\sc\bfseries \contentsname}
+		  \draw[fill=doc!60,draw=doc!60] (10,-.75) rectangle (20,1);
+		  \clip (10,-.75) rectangle (20,1);
+		  \pgftext[right,x=15cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname}
+	  \end{tikzpicture}}%
+	\@starttoc{toc}}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ALIGN WITH LESS VSPACE %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\jot}{0pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SIMPLE REFERENCE MAKER WITH CORRECT COUNTER %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\preplabel}[1]{
+    \addtocounter{#1}{-1}
+    \refstepcounter{#1}
+}
+
+
+
+
+
+
+
+
+\usepackage{silence}
+\WarningFilter{latexfont}{}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{12.8064pt}
+
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+

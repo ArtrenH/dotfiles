@@ -304,9 +304,9 @@
 \newcommand{\prob}[2]{\begin{problem}{#1}{}#2\end{problem}}
 \newcommand{\probstar}[2]{\begin{problem*}{#1}{}#2\end{problem*}}
 \newcommand{\solu}[2]{\begin{solution}{#1}{}#2\end{solution}}
-\newcommand{\solustar}[2]{\begin{solution*}{#1}{}#2\end{solution*}}
 
 \newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
+\newcommand{\thmstar}[2]{\begin{Theorem*}{#1}{}#2\end{Theorem*}}
 \newcommand{\wc}[2]{\begin{wconc}{#1}{}\setlength{\parindent}{1cm}#2\end{wconc}}
 \newcommand{\thmcon}[1]{\begin{Theoremcon}{#1}\end{Theoremcon}}
 \newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
@@ -418,6 +418,8 @@
 \let\oldgeq\geq
 \renewcommand{\leq}{\leqslant}
 \renewcommand{\geq}{\geqslant}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
 
 % % redefine matrix env to allow for alignment, use r as default
 % \renewcommand*\env@matrix[1][r]{\hskip -\arraycolsep
@@ -440,7 +442,7 @@
 {\addvspace{30pt}%
 	\begin{tikzpicture}[remember picture, overlay]%
 		\draw[fill=doc!60,draw=doc!60] (-7,-.1) rectangle (-0.9,.5);%
-		\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\sc\bfseries \chaptername\ \thecontentslabel};%
+		\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\sc\bfseries \chaptername\ \thecontentslabel}
 	\end{tikzpicture}\color{doc!60}\large\sc\bfseries}%
 {}
 {}
@@ -466,10 +468,10 @@
 	\chapter*{%
 	  \vspace*{-20\p@}%
 	  \begin{tikzpicture}[remember picture, overlay]%
-		  \pgftext[right,x=15cm,y=0.2cm]{\color{doc!60}\Huge\sc\bfseries \contentsname};%
+		  \pgftext[right,x=15cm,y=0.2cm]{\color{doc!60}\Huge\sc\bfseries \contentsname}
 		  \draw[fill=doc!60,draw=doc!60] (10,-.75) rectangle (20,1);%
 		  \clip (10,-.75) rectangle (20,1);
-		  \pgftext[right,x=15cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname};%
+		  \pgftext[right,x=15cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname}
 	  \end{tikzpicture}}%
 	\@starttoc{toc}}
 \makeatother
