@@ -1,0 +1,29 @@
+\documentclass{report}
+
+\input{~/dotfiles/tex/templates/preamble.tex}
+\input{~/dotfiles/tex/templates/macros.tex}
+\input{~/dotfiles/tex/templates/letterfonts.tex}
+
+\title{\Huge{Some Class}\\Random Examples}
+\author{\huge{Your Name}}
+\date{}
+
+\usepackage{silence}
+\WarningFilter{latexfont}{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{}
+\section{Random Examples}
+\dfn{}{
+
+}
+
+\end{document}

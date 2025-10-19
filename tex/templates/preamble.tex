@@ -1,46 +1,129 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PACKAGE IMPORTS
+% PACKAGE IMPORTS und Font
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\usepackage[tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=2cm,footskip=.2in]{geometry}
+
+% Hier Schriftart auswählen
+\newcounter{schriftart}
+
+% 5 SF Pro Rounded, 1 Roboto, 0 Standard
+\setcounter{schriftart}{1}
+
+
+\ifnum\value{schriftart}=5
+	\setmainfont{SF Pro Display} % Schriftart über Counter ändern
+	\setsansfont{SF Pro Display}
+	\def\balkenx{10.1}
+\else
+	\ifnum\value{schriftart}=1
+		\newcommand{\myfont}{Roboto} % Schriftart über Counter ändern
+		\def\balkenx{10.25}
+	\else
+		\def\balkenx{10.33}
+	\fi
+\fi
+% \usepackage{unicode-math} % Ist nicht mit vielen der Mathematik-Paketen und meier preamble.tex kompatibel
+% \setmathfont{Latin Modern Math}  % Alternativ: XITS Math, Asana Math
+
+
+%\usepackage{soul}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\AtBeginDocument{\shorthandoff{"}}
+\usepackage[normalem]{ulem}
+\usepackage[a4paper,tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=2cm,footskip=.2in]{geometry}
 \usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
-\usepackage[varbb]{newpxmath}
+%\usepackage[varbb]{newpxmath}
+
+%\usepackage{mathbbol} % Für richtiges Blackboard Bold, aber Vorsicht, macht alles fett
+
 \usepackage{xfrac}
 \usepackage[makeroom]{cancel}
 \usepackage{mathtools}
-\usepackage{bookmark}
+\usepackage[atend]{bookmark}
 \usepackage{enumitem}
-\usepackage{hyperref,theoremref}
-\hypersetup{
-	pdftitle={Assignment},
-	colorlinks=true, linkcolor=doc!90,
-	bookmarksnumbered=true,
-	bookmarksopen=true
-}
+\setlist[itemize]{topsep=6pt plus 2pt minus 1pt, itemsep=3pt plus 2pt minus 1pt}
+\usepackage[dvipsnames, table]{xcolor}
 \usepackage[most,many,breakable]{tcolorbox}
-\usepackage{xcolor}
-\usepackage{varwidth}
 \usepackage{varwidth}
 \usepackage{etoolbox}
 %\usepackage{authblk}
 \usepackage{nameref}
 \usepackage{multicol,array}
-\usepackage[ruled, vlined, linesnumbered, german]{algorithm2e}
-\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{shapes.geometric}
+\usepackage[ruled, vlined,linesnumbered, german]{algorithm2e} % Verwendet den Counter algocf \numberwithin{algocf}{chapter}
+\SetArgSty{textnormal} % Macht, dass der Text in algorithm2e nicht kursiv ist
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi)
 \usepackage{import}
 \usepackage{xifthen}
 \usepackage{pdfpages}
 \usepackage{transparent}
+\usepackage{pgffor} % Macht irgenwas, dass mein Command gleichzeitig mehrere Indexeinträge anlelgen kann
 
-\begin{comment}
+\usepackage{arydshln}     %Matrix machen
+\usepackage{nicematrix}
+\usepackage{stmaryrd} % Widerspruchzeichen
+\usepackage{float}
+\usepackage{esint} % Für fintegrale (heißen vielleicht Mittelwertintegrale)
+\usepackage{bm} % Für Mathemodus dicker Text
+% \usepackage[utf8]{inputenc} % Brauchte ich nur bei pdftex
+\usepackage{csquotes} % für deutsche Texte mit Anführungszeichen
+\usepackage{centernot} % Für \centernot\implies
+\usepackage{pgfplots} % Für Funktionsgraphen
+\pgfplotsset{compat=1.18} % Warnmeldung vermeiden
+\usepackage{tkz-graph}
+\usepackage{caption}
+\usepackage{stackengine}
+%\usepackage{eucal} % Andere \mathcal{} Symbole
+\usepackage{ocgx2}
+\usepackage{media9}
+\usepackage{pdfpages}
+\usetikzlibrary{decorations.pathreplacing,calc}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{silence}
+\WarningFilter{latexfont}{}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\setlength{\headheight}{12.8064pt}
+\setlength{\headheight}{14.5pt}
+\setlength{\footskip}{25pt} % Wie weit die Seitenzahl vom Textende der Seite nach unten eingerückt wird
+\fancypagestyle{plain}{} % Auch bei Kapiteln Kopfzeile
+\usepackage{changepage} % Für adjustwidth
+\usepackage{adjustbox}
+\usepackage{makeidx} % Für Index am Ende
+\makeindex
+\usepackage{hyperref,theoremref} %Hyperref am Ende includen, damit es keine Probleme gibt
+\hypersetup{
+	pdftitle={Assignment},
+	colorlinks=true, linkcolor=linkfarbe,
+	bookmarksnumbered=true,
+	bookmarksopen=true
+}
+
+\usepackage{zref-abspage,zref-user}
+\usepackage{atbegshi}
+\usepackage{datenumber}
+\usepackage{xstring}
+%\usepackage{bbm} % ChaptGPT versuch für N (natürlichen Zahlen) fett
+
+
+
+
+
+
+
+
+
 \newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
 \SetCommentSty{mycommfont}
 \newcommand{\incfig}[1]{%
     \def\svgwidth{\columnwidth}
     \import{./figures/}{#1.pdf_tex}
 }
-\end{comment}
+
 \usepackage{tikzsymbols}
 %\renewcommand\qedsymbol{$\Laughey$}
 
@@ -50,166 +133,394 @@
 %\usepackage{pdfpages}
 %\usepackage{transparent}
 
+
+
+% \usepackage{titlesec}
+
+% \titleformat{\chapter}[hang]
+%   {\normalfont\Huge\bfseries}
+%   {\thechapter.}
+%   {1em}
+%   {}[\nopagebreak] % kein Zeilenumbruch nach Kapitel
+
+% \titlespacing*{\chapter}{0pt}{0pt}{0pt} % kein Abstand vor oder nach Kapitel
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\patchcmd{\chapter}{\clearpage}{}{}{}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SELF MADE COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\definecolor{doc}{RGB}{0,60,110}
+\definecolor{doc}{HTML}{0B1D51}
+\definecolor{docg}{HTML}{00BB00} % hellgrün
+\definecolor{doc}{HTML}{064789} % geeignetes blau für Inhaltsverzeichnis
+
+\definecolor{alternativlink}{HTML}{1C6CB3} % Farbe für Hyperlinks
+\colorlet{linkfarbe}{doc!80!white} % Farbe für Hyperlinks
+
+\definecolor{myg}{RGB}{56, 140, 70}
+\definecolor{myb}{RGB}{45, 111, 177}
+\definecolor{myr}{RGB}{199, 68, 64}
+\definecolor{mytheorembg}{HTML}{F2F2F9}
+\definecolor{mytheoremfr}{HTML}{00007B}
+\definecolor{mylemmabg}{HTML}{e3f2fd}
+\definecolor{mylemmafr}{HTML}{1e96fc}
+\definecolor{mypropbg}{HTML}{d7c8f3}
+\definecolor{mypropfr}{HTML}{8b26c3}
+\definecolor{myexamplebg}{HTML}{EAFBF8}
+\definecolor{myexamplefr}{HTML}{2A7F7F}
+\definecolor{myexampleti}{HTML}{2A7F7F}
+\definecolor{myexamplebg}{RGB}{24, 183, 221}
+\definecolor{myexamplefr}{RGB}{24, 183, 221}
+\definecolor{mydefinitbg}{HTML}{E5E5FF}
+\definecolor{mydefinitfr}{HTML}{3F3FA3}
+\definecolor{notesgreen}{RGB}{0,162,0}
+\definecolor{myp}{RGB}{197, 92, 212}
+\definecolor{mygr}{HTML}{2C3338}
+\definecolor{myred}{RGB}{127,0,0}
+\definecolor{myyellow}{RGB}{169,121,69}
+\definecolor{myexercisebg}{HTML}{023e7d}
+\definecolor{myexercisefr}{HTML}{023e8a}
+\definecolor{myclaimbg}{HTML}{99ca3c}
+\definecolor{myclaimfr}{HTML}{208b3a}
+\definecolor{mynotationbg}{HTML}{fff3b0}
+\definecolor{mynotationfr}{HTML}{ffb700}
+\definecolor{mynotationfr}{RGB}{227, 173, 15}
+\definecolor{myntbg}{HTML}{f8f9fa}
+\definecolor{myntfr}{HTML}{B0B2B8}
+\definecolor{myfolg}{RGB}{118, 186, 13}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TCOLORBOX SETUPS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setlength{\parindent}{1cm}
-\input{~/dotfiles/tex/templates/theorems.tex}
+\setlength{\parindent}{0cm} % Keine scheiß automatische Einrückung
+
+% Der globale Counter zum abhängigen Zählen
+
+\newcounter{globalcounter} %\numberwithin{globalcounter}{chapter} % Definiere einen globalen Zähler für alle
+%\counterwithout{globalcounter}{chapter}
+\renewcommand{\theglobalcounter}{\arabic{globalcounter}} % Globale Nummerierung ohne Kapitelbindung
+
+
+
+
+
+
+%================================
+% Aufgabe
+%================================
+
+\newcounter{aufg} \numberwithin{aufg}{chapter}
 
 \tcbuselibrary{theorems,skins,hooks}
-
-
-\newcommand{\standardBoxes}{
-    % THEOREM BOX
-    \newcounter{thm} \numberwithin{thm}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=thm]{Theorem}{Theorem}{Theorem style}{th}
-    \newtcolorbox{Theoremcon}{Theoremcon style}
-
-    % Corollery
-    \newcounter{cor} \numberwithin{cor}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=cor]{Corollary}{Korollar}{Corollary style}{th}
-
-    % LEMMA
-    \newcounter{lemma} \numberwithin{lemma}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=lemma]{mlemma}{Lemma}{Lemma style}{th}
-
-    % FAKT
-    \newcounter{fact} \numberwithin{fact}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=fact]{fact}{Fakt}{Fact style}{th}
-
-    % NOTATION
-    \newcounter{nota} \numberwithin{nota}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=nota]{notation}{Notation}{Fact style}{th}
-
-    % BEHAUPTUNG
-    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
-
-    % PROPOSITION
-    \newcounter{prop} \numberwithin{prop}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}{Prop style}{th}
-
-    % CLAIM BOX
-    \newcounter{clm} \numberwithin{clm}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}{claim style}{th}
-
-    % EXERCISE BOX
-    \newtcbtheorem[number within=section]{Exercise}{Exercise}{Exercise style}{th}
-
-    % EXAMPLE BOX
-    \newcounter{ex} \numberwithin{ex}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
-
-    % DEFINITION BOX
-    \newcounter{dfn} \numberwithin{dfn}{chapter}
-    \newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
-
-    % NOTE BOX
-    \newcounter{nt} \numberwithin{nt}{chapter}
-    \usetikzlibrary{arrows,calc,shadows.blur}
-    \newtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{Note style}{def}
-}
-
-\newcommand{\oneCounterBoxes}{
-    \usetikzlibrary{arrows,calc,shadows.blur}
-    \newcounter{boxCounter} \numberwithin{boxCounter}{section}
-    \makeatletter
-    \renewcommand{\theboxCounter}{\arabic{section}.\arabic{boxCounter}} % Only section + counter
-    \makeatother
-
-
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Definition}{Definition}{Definition style}{def}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{claim}{Satz}{claim style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Obs}{Beobachtung}{Obs style}{th}
-
-    \newtcbtheorem[no counter]{note}{Bemerkung}{Note style}{def}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Example}{Beispiel}{Example style}{ex}
-
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Theorem}{Theorem}{Theorem style}{th}
-}
-
-\newcommand{\AnaBoxes}{
-    \usetikzlibrary{arrows,calc,shadows.blur}
-    \newcounter{boxCounter} \numberwithin{boxCounter}{chapter}
-    \newcounter{dfn} \numberwithin{dfn}{chapter}
-    \newcounter{ex} \numberwithin{ex}{chapter}
-
-    \newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
-    \newtcbtheorem[number within=chapter, use counter=boxCounter]{claim}{Satz}{claim style}{th}
-    \newtcbtheorem[number within=chapter, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
-    \newtcbtheorem[number within=chapter, use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
-    \newtcbtheorem[number within=chapter, use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
-    \newtcbtheorem[number within=chapter, use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
-
-    \newtcbtheorem[no counter]{note}{Bemerkung}{Note style}{def}
-    \newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
-    \newtcbtheorem[number within=chapter, use counter=boxCounter]{notation}{Notation}{Fact style}{th}
-    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
-
-    \newtcbtheorem[number within=chapter, use counter=boxCounter]{Theorem}{Theorem}{Theorem style}{th}
-    \newtcolorbox{Theoremcon}{Theoremcon style}
-
-    \newtcbtheorem[number within=chapter]{Exercise}{Exercise}{Exercise style}{th}
-}
-
-\newcommand{\EinfAlgBoxes}{
-    \usetikzlibrary{arrows,calc,shadows.blur}
-    \newcounter{boxCounter} \numberwithin{boxCounter}{section}
-
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Definition}{Definition}{Definition style}{def}
-    \newcounter{clm} \numberwithin{clm}{section}
-    \newtcbtheorem[number within=section, use counter=clm]{claim}{Satz}{claim style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Corollary}{Corollary}{Corollary style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{fact}{Fact}{Fact style}{th}
-
-    \newtcbtheorem[number within=section, use counter=boxCounter]{note}{Note}{Note style}{def}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Example}{Example}{Example style}{ex}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{notation}{Notation}{Fact style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{convention}{Convention}{Fact style}{th}
-    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
-
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Theorem}{Theorem}{Theorem style}{th}
-    \newtcolorbox{Theoremcon}{Theoremcon style}
-
-    \newtcbtheorem[number within=section]{Exercise}{Exercise}{Exercise style}{th}
-}
-
-\newcommand{\edmBoxes}{
-    \usetikzlibrary{arrows,calc,shadows.blur}
-    \newcounter{boxCounter}
-
-    \newtcbtheorem[no counter]{Definition}{Definition}{Definition style, theorem name}{def}
-    \newtcbtheorem[use counter=boxCounter]{claim}{Satz}{claim style}{th}
-    \newtcbtheorem[use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
-    \newtcbtheorem[use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
-    \newtcbtheorem[use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
-    \newtcbtheorem[use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
-
-    \newtcbtheorem[no counter]{note}{Bemerkung}{Note style}{def}
-    \newtcbtheorem[no counter]{Example}{Beispiel}{Example style}{ex}
-    \newtcbtheorem[no counter]{notation}{Notation}{Fact style}{th}
-    \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
-
-    \newtcbtheorem[]{Theorem}{Theorem}{Theorem style}{th}
-    \newtcolorbox{Theoremcon}{Theoremcon style}
-
-    \newtcbtheorem[]{Exercise}{Exercise}{Exercise style}{th}
-}
-
-
-% SOLUTION BOX
-\makeatletter
-\newtcolorbox{solution}{enhanced,
+\tcbset{Exercise style/.style={
+	%
+	enhanced,
 	breakable,
+	colback = myexercisebg!15,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{myexercisefr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = myexercisefr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, myexercisefr},
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Exercise}{Aufgabe}{Exercise style}{aufg}
+
+%================================
+% Behauptung
+%================================
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{Behauptung style/.style={
+	%
+	enhanced,
+	breakable,
+	colback = mylemmabg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{mylemmafr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mylemmafr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mylemmafr},
+	}
+}
+\newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
+
+%================================
+% Beispiel
+%================================
+
+\newcounter{ex} \numberwithin{ex}{chapter}
+\tcbset{Example style/.style={
+	%
+	colback = myexamplebg!9,
+	breakable,
+	enhanced jigsaw,
+	colframe = myexamplefr!85!black,
+	coltitle = myexamplefr!85!black,
+	boxrule = 2pt,
+	detach title,
+	before upper=\tcbtitle\par\smallskip,
+	description font = \mdseries,
+	separator sign none,
+	description delimiters parenthesis,
+	fonttitle = \bfseries\sffamily
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Example}{Beispiel}{Example style}{ex}
+
+%================================
+% Bemerkung
+%================================
+
+\newcounter{nt} \numberwithin{nt}{chapter}
+
+\usetikzlibrary{arrows,calc,shadows.blur}
+\tcbuselibrary{skins}
+\tcbset{note style/.style={
+	enhanced jigsaw,
+	colback=myntbg,%
+	colframe=myntfr,
+	boxrule=1pt,
+	%title=\textbf{Bemerkung:-},
+	halign title=flush center,
+	coltitle=black,
+	breakable,
+	breakable,
+	drop shadow=black!50!white,
+	attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+	boxed title style={%
+			colback=white,
+			boxrule=1pt,
+			boxsep=2pt,
+			drop shadow=black!50!white,
+			underlay={%
+					\begin{scope}[myntfr]
+						\fill ($(interior.west) + (-0.5pt,0)$) circle (2pt);
+						\fill ($(interior.east) + (0.5pt,0)$) circle (2pt);
+					\end{scope}
+				},
+		},
+		width=\textwidth, % Verwendet den gesamten verfügbaren Platz
+	#1
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{note}{Bemerkung}{note style}{def}
+
+%================================
+% Definition
+%================================
+
+\newcounter{dfn} \numberwithin{dfn}{chapter}
+\tcbset{Definition style/.style={
+	enhanced,
+    colbacktitle=red!75!black,
+	%separator sign={\if\ifnocountertrue \hspace{-4pt}: \else:\fi},
+	before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=2pt,
+	breakable,
+    enforce breakable,
+	attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
+	boxed title style={
+		frame code={
+			\path[fill=tcbcolback]
+			([yshift=-1mm,xshift=-1mm]frame.north west)
+			arc[start angle=0,end angle=180,radius=1mm]
+			([yshift=-1mm,xshift=1mm]frame.north east)
+			arc[start angle=180,end angle=0,radius=1mm];
+			\path[left color=tcbcolback!70!black,right color=tcbcolback!70!black,middle color=tcbcolback!80!black]
+			([xshift=-2mm]frame.north west)--
+			([xshift=2mm]frame.north east)
+			[rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)--
+			([yshift=-1pt]frame.south east)--
+			([yshift=-1pt]frame.south west)--
+			([xshift=-1mm,yshift=-1mm]frame.north west)
+			[sharp corners]-- cycle;
+		},
+	interior engine=empty,
+	},
+	fonttitle = \bfseries\sffamily
+	%title={Definition}
+	#1
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Definition}{Definition}{Definition style}{def}
+
+%================================
+% Fakt
+%================================
+
+\newcounter{fact} \numberwithin{fact}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{fact style/.style={
+	%
+	enhanced,
+	breakable,
+	colback = white,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{black},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = black,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mylemmafr},
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{fact}{Fakt}{fact style}{th}
+
+%================================
+% Folgerung
+%================================
+
+\newcounter{folg} \numberwithin{folg}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{Folgerung style/.style={%
+	enhanced,
+	breakable,
+	colback = myfolg!10,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{myfolg},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = myfolg,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, myfolg}
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Folgerung}{Folgerung}{Folgerung style}{folg}
+
+%================================
+% Frage
+%================================
+
+\makeatletter
+
+\tcbset{question style/.style={
+	enhanced,
+	breakable, boxrule = 2pt,
+	fonttitle = \sffamily,
+	colback=white,
+	colframe=myb!80!black,
+	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+	%fonttitle=\bfseries,
+	%title={#2},
+	boxed title size=title,
+	boxed title style={%
+			sharp corners,
+			rounded corners=northwest,
+			colback=tcbcolframe,
+			boxrule=0pt,
+		},
+	underlay boxed title={%
+			\path[fill=tcbcolframe] (title.south west)--
+			(title.south east) to[out=0, in=180] ([xshift=5mm]title.east)--
+			(title.center-|frame.east)
+			[rounded corners=\kvtcb@arc] |-
+			(frame.north) -| cycle;
+		},
+	#1
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{question}{Question}{question style}{def}
+
+%================================
+% Korollar
+%================================
+
+\newcounter{cor} \numberwithin{cor}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{Corollary style/.style={
+	%
+	enhanced,
+	breakable,
+	colback = myp!10,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{myp!85!black},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = myp!85!black,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, myp!85!black}
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Corollary}{Corollary}{Corollary style}{th}
+
+%================================
+% Lemma
+%================================
+
+\newcounter{lemma} \numberwithin{lemma}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{mlemma style/.style={
+	%
+	enhanced,
+	breakable,
+	colback = mylemmabg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{mylemmafr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mylemmafr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mylemmafr},
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+
+%================================
+% Lösung
+%================================
+
+\makeatletter
+\tcbset{solution style/.style={
+	enhanced, boxrule = 2pt,
+	breakable,
+	fonttitle = \sffamily,
 	colback=white,
 	colframe=myg!80!black,
 	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
-	title=Lösung,
+	%title=Lösung,
 	boxed title size=title,
 	boxed title style={%
 			sharp corners,
@@ -218,85 +529,149 @@
 			boxrule=0pt,
 		},
 	underlay boxed title={%
-			\path[fill=tcbcolframe] (title.south west)--(title.south east)
-			to[out=0, in=180] ([xshift=5mm]title.east)--
+			\path[fill=tcbcolframe] (title.south west)--
+			(title.south east) to[out=0, in=180] ([xshift=5mm]title.east)--
 			(title.center-|frame.east)
 			[rounded corners=\kvtcb@arc] |-
 			(frame.north) -| cycle;
 		},
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{solution}{Solution}{solution style}{def}
+
+%================================
+% Notation
+%================================
+
+\newcounter{notation} \numberwithin{notation}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{notation style/.style={
+	%
+	enhanced,
+	breakable,
+	colback = mynotationbg!50,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{mynotationfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mynotationfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mynotationfr},
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{notation}{Notation}{notation style}{th}
+
+%================================
+% Proposition
+%================================
+
+\newcounter{prop} \numberwithin{prop}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{Prop style/.style={
+	%
+	enhanced,
+	breakable,
+	colback = mypropbg!30,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{mypropfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mypropfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mypropfr},
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+
+
+%================================
+% Construction
+%================================
+
+\newcounter{const} \numberwithin{const}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Const}{Construction}{Prop style}{th}
+
+%================================
+% Satz
+%================================
+
+\newcounter{clm} \numberwithin{clm}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{claim style/.style={
+	%
+	enhanced,
+	breakable,
+	colback = myclaimbg!20,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{myclaimfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = myclaimfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, myclaimfr}
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{claim}{Claim}{claim style}{th}
+
+%================================
+% Theorem
+%================================
+
+\newcounter{thm} \numberwithin{thm}{chapter}
+
+\tcbuselibrary{theorems,skins,hooks}
+\tcbset{Theorem style/.style={%
+	enhanced,
+	breakable,
+	colback = mytheorembg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{mytheoremfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mytheoremfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mytheoremfr},
+	}
+}
+\newtcbtheorem[number within=chapter, use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+\tcbuselibrary{theorems,skins,hooks}
+\newtcolorbox{Theoremcon}
+{%
+	enhanced,
+	breakable,
+	colback = mytheorembg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {3pt}{0pt}{mytheoremfr},
+	sharp corners,
+	description font = \mdseries,
+	separator sign none
 }
 \makeatother
 
-% QUESTION BOX
-\makeatletter
-\newtcbtheorem{question}{Frage}{enhanced,
-	breakable,
-	colback=white,
-	colframe=myb!80!black,
-	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
-	fonttitle=\bfseries,
-	boxed title size=title,
-	boxed title style={%
-			sharp corners,
-			rounded corners=northwest,
-			colback=tcbcolframe,
-			boxrule=0pt,
-		},
-	underlay boxed title={%
-			\path[fill=tcbcolframe] (title.south west)--(title.south east)
-			to[out=0, in=180] ([xshift=5mm]title.east)--
-			(title.center-|frame.east)
-			[rounded corners=\kvtcb@arc] |-
-			(frame.north) -| cycle;
-		},
-	#1
-}{def}
-\makeatother
 
-\makeatletter
-\newtcbtheorem[no counter]{problem}{Problem}{enhanced,
-	breakable,
-	colback=white,
-	colframe=myb!80!black,
-	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
-	fonttitle=\bfseries,
-	boxed title size=title,
-	boxed title style={%
-			sharp corners,
-			rounded corners=northwest,
-			colback=tcbcolframe,
-			boxrule=0pt,
-		},
-	underlay boxed title={%
-			\path[fill=tcbcolframe] (title.south west)--(title.south east)
-			to[out=0, in=180] ([xshift=5mm]title.east)--
-			(title.center-|frame.east)
-			[rounded corners=\kvtcb@arc] |-
-			(frame.north) -| cycle;
-		},
-	#1
-}{def}
-\makeatother
 
-\newtcbtheorem[number within=chapter]{wconc}{Wrong Concept}{
-	breakable,
-	enhanced,
-	colback=white,
-	colframe=myr,
-	arc=0pt,
-	outer arc=0pt,
-	fonttitle=\bfseries\sffamily\large,
-	colbacktitle=myr,
-	attach boxed title to top left={},
-	boxed title style={
-			enhanced,
-			skin=enhancedfirst jigsaw,
-			arc=3pt,
-			bottom=0pt,
-			interior style={fill=myr}
-		},
-	#1
-}{def}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,69 +680,77 @@
 
 
 \newcommand{\dfn}[2]{\begin{Definition}{#1}{}#2\end{Definition}}
-\newcommand{\dfnstar}[2]{\begin{Definition*}{#1}{}#2\end{Definition*}}
 \newcommand{\clm}[2]{\begin{claim}{#1}{}#2\end{claim}}
-\newcommand{\clmstar}[2]{\begin{claim*}{#1}{}#2\end{claim*}}
 \newcommand{\lemma}[2]{\begin{mlemma}{#1}{}#2\end{mlemma}}
-\newcommand{\lemmastar}[2]{\begin{mlemma*}{#1}{}#2\end{mlemma*}}
 \newcommand{\nota}[2]{\begin{notation}{#1}{}#2\end{notation}}
-\newcommand{\notastar}[2]{\begin{notation*}{#1}{}#2\end{notation*}}
 \newcommand{\fac}[2]{\begin{fact}{#1}{}#2\end{fact}}
-\newcommand{\facstar}[2]{\begin{fact*}{#1}{}#2\end{fact*}}
-\newcommand{\conv}[2]{\begin{convention}{#1}{}#2\end{convention}}
-\newcommand{\convstar}[2]{\begin{convention*}{#1}{}#2\end{convention*}}
 \newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
-\newcommand{\corstar}[2]{\begin{Corollary*}{#1}{}#2\end{Corollary*}}
 \newcommand{\prop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
-\newcommand{\propstar}[2]{\begin{Prop*}{#1}{}#2\end{Prop*}}
+\newcommand{\const}[2]{\begin{Const}{#1}{}#2\end{Const}}
 \newcommand{\ex}[2]{\begin{Example}{#1}{}#2\end{Example}}
-\newcommand{\exstar}[2]{\begin{Example*}{#1}{}#2\end{Example*}}
 \newcommand{\nt}[2]{\begin{note}{#1}{}#2\end{note}}
-\newcommand{\ntstar}[2]{\begin{note*}{#1}{}#2\end{note*}}
 \newcommand{\qs}[2]{\begin{question}{#1}{}#2\end{question}}
-\newcommand{\qsstar}[2]{\begin{question*}{#1}{}#2\end{question*}}
-\newcommand{\prob}[2]{\begin{problem}{#1}{}#2\end{problem}}
-\newcommand{\probstar}[2]{\begin{problem*}{#1}{}#2\end{problem*}}
 \newcommand{\solu}[2]{\begin{solution}{#1}{}#2\end{solution}}
-\newcommand{\obs}[2]{\begin{Obs}{#1}{}#2\end{Obs}}
+\newcommand{\folg}[2]{\begin{Folgerung}{#1}{}#2\end{Folgerung}}
 
+\newcommand{\aufg}[2]{\begin{Exercise}{#1}{}#2\end{Exercise}}
 \newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
-\newcommand{\thmstar}[2]{\begin{Theorem*}{#1}{}#2\end{Theorem*}}
-\newcommand{\wc}[2]{\begin{wconc}{#1}{}\setlength{\parindent}{1cm}#2\end{wconc}}
 \newcommand{\thmcon}[1]{\begin{Theoremcon}{#1}\end{Theoremcon}}
 \newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
 \newcommand{\behauptung}[2]{\begin{Behauptung}{#1}{}#2\end{Behauptung}}
 
-\newcommand{\lecturedivider}[2]{
-  \vspace{1em}
-  \noindent
-  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
-  \vspace{-1.2em}
-  \begin{center}
-    \textbf{#1. Lecture - #2} % Date centered
-  \end{center}
-  \vspace{-1.5em}
-  \noindent
-  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Another horizontal line
-  \vspace{1em}
-}
+% Variante ohne Counter
+\newcommand{\dfnstern}[2]{\begin{Definition*}{#1}{}#2\end{Definition*}}
+\newcommand{\clmstern}[2]{\begin{claim*}{#1}{}#2\end{claim*}}
+\newcommand{\lemmastern}[2]{\begin{mlemma*}{#1}{}#2\end{mlemma*}}
+\newcommand{\notastern}[2]{\begin{notation*}{#1}{}#2\end{notation*}}
+\newcommand{\facstern}[2]{\begin{fact*}{#1}{}#2\end{fact*}}
+\newcommand{\corstern}[2]{\begin{Corollary*}{#1}{}#2\end{Corollary*}}
+\newcommand{\propstern}[2]{\begin{Prop*}{#1}{}#2\end{Prop*}}
+\newcommand{\conststern}[2]{\begin{Const*}{#1}{}#2\end{Const*}}
+\newcommand{\exstern}[2]{\begin{Example*}{#1}{}#2\end{Example*}}
+\newcommand{\ntstern}[2]{\begin{note*}{#1}{}#2\end{note*}}
+\newcommand{\qsstern}[2]{\begin{question*}{#1}{}#2\end{question*}}
+\newcommand{\solustern}[2]{\begin{solution*}{#1}{}#2\end{solution*}}
+\newcommand{\folgstern}[2]{\begin{Folgerung*}{#1}{}#2\end{Folgerung*}}
+
+\newcommand{\aufgstern}[2]{\begin{Exercise*}{#1}{}#2\end{Exercise*}}
+\newcommand{\thmstern}[2]{\begin{Theorem*}{#1}{}#2\end{Theorem*}}
+\newcommand{\thmconstern}[1]{\begin{Theoremcon*}{#1}\end{Theoremcon*}}
+\newcommand{\pfstern}[2]{\begin{myproof}[#1]#2\end{myproof}}
+\newcommand{\behauptungstern}[2]{\begin{Behauptung*}{#1}{}#2\end{Behauptung*}}
+
+% star instead of stern
+
+\let\dfnstar\dfnstern
+\let\clmstar\clmstern
+\let\lemmastar\lemmastern
+\let\notastar\notastern
+\let\facstar\facstern
+\let\corstar\corstern
+\let\propstar\propstern
+\let\conststar\conststern
+\let\exstar\exstern
+\let\ntstar\ntstern
+\let\qsstar\qsstern
+\let\solustar\solustern
+\let\folgstar\folgstern
+
+\let\aufgstar\aufgstern
+\let\thmstar\thmstern
+\let\thmconstar\thmconstern
+\let\pfstar\pfstern
+\let\behauptungstar\behauptungstern
 
 
-\newcommand{\basicdivider}[1]{
-  \vspace{1em}
-  \noindent
-  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
-  \vspace{-1.2em}
-  \begin{center}
-    \textbf{#1} % Date centered
-  \end{center}
-  \vspace{-1.5em}
-  \noindent
-  \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Another horizontal line
-  \vspace{1em}
-}
 
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+\newtcolorbox{linebox}{colback=gray!70, colframe=gray!70, boxrule=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt, width=\textwidth, height=0.6pt, arc=0.3pt, boxsep=0pt, before skip=1em, after skip=1em}
+
+
+
+
+\newcommand*\circled[1]{
+	\tikz[baseline = (char.base)]{
 		\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 \newcommand\getcurrentref[1]{%
 	\ifnumequal{\value{#1}}{0}
@@ -386,7 +769,7 @@
 
 \makeatletter
 \newcommand{\setword}[2]{%
-	\phantomsection
+	\phantomsection{}
 	#1\def\@currentlabel{\unexpanded{#1}}\label{#2}%
 }
 \makeatother
@@ -405,16 +788,16 @@
 		}
 }
 
-\newsavebox\diffdbox
+\newsavebox\diffdbox{}
 \newcommand{\slantedromand}{{\mathpalette\makesl{d}}}
 \newcommand{\makesl}[2]{%
 \begingroup
 \sbox{\diffdbox}{$\mathsurround=0pt#1\mathrm{#2}$}%
-\pdfsave
+\pdfsave{}
 \pdfsetmatrix{1 0 0.2 1}%
 \rlap{\usebox{\diffdbox}}%
-\pdfrestore
-\hskip\wd\diffdbox
+\pdfrestore{}
+\hskip\wd\diffdbox{}
 \endgroup
 }
 \newcommand{\dd}[1][]{\ensuremath{\mathop{}\!\ifstrempty{#1}{%
@@ -439,13 +822,11 @@
 }
 \providecommand*{\pdv}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}
 
-% redefinde leq and geq
-\let\oldleq\leq
-\let\oldgeq\geq
-\renewcommand{\leq}{\leqslant}
-\renewcommand{\geq}{\geqslant}
-\renewcommand{\le}{\leqslant}
-\renewcommand{\ge}{\geqslant}
+% I prefer the slanted \leq
+\let\oldleq\leq{} % save them in case they're every wanted
+\let\oldgeq\geq{}
+%\renewcommand{\leq}{\leqslant}
+%\renewcommand{\geq}{\geqslant}
 
 % % redefine matrix env to allow for alignment, use r as default
 % \renewcommand*\env@matrix[1][r]{\hskip -\arraycolsep
@@ -453,69 +834,509 @@
 %     \array{*\c@MaxMatrixCols #1}}
 
 
+% Achtung Box
+\newcommand{\achtung}[3]{
+	\begin{center}
+    \par\noindent
+    \raisebox{0pt}[0.8\baselineskip][0.8\baselineskip]{\Huge\bfseries{}!}
+    \hspace{#2}%
+    \fbox{%
+        \begin{minipage}{#1\linewidth}
+			#3
+        \end{minipage}%
+    }%
+    \hspace{#2}%
+    \raisebox{0pt}[0.8\baselineskip][0.8\baselineskip]{\Huge\bfseries{}!} \\[7pt]
+    \par
+\end{center}
+}
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TABLE OF CONTENTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \renewcommand{\chaptername}{Kapitel}
-% \newcommand{\pagename}{Seite }
-
 \usepackage{tikz}
-\definecolor{doc}{RGB}{0,60,110}
+\usetikzlibrary{patterns}
+\usetikzlibrary{patterns.meta}
+\usetikzlibrary{arrows}
 \usepackage{titletoc}
+
+\renewcommand{\chaptername}{Kapitel}
+\newcommand{\pagename}{Seite}
 \contentsmargin{0cm}
-\titlecontents{chapter}[3.7pc]
-{\addvspace{30pt}%
-	\begin{tikzpicture}[remember picture, overlay]%
-		\draw[fill=doc!60,draw=doc!60] (-7,-.1) rectangle (-0.3,.5);%
-		\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\sc\bfseries \chaptername\ \thecontentslabel}
-	\end{tikzpicture}\color{doc!60}\large\sc\bfseries}%
+\titlecontents{part}[0pc]
+{\color{doc}\huge\bfseries}
 {}
 {}
-{\;\titlerule\;\large\sc\bfseries \pagename\ \thecontentspage
-	\begin{tikzpicture}[remember picture, overlay]
-		\draw[fill=doc!60,draw=doc!60] (2pt,0) rectangle (4,0.1pt);
-	\end{tikzpicture}}%
-\titlecontents{section}[3.7pc]
-{\addvspace{2pt}}
-{\contentslabel[\thecontentslabel]{2pc}}
+{\;\titlerule\;\large\bfseries \pagename\;\thecontentspage}
+\titlecontents{chapter}[3pc]
+{\addvspace{15pt}
+\begin{tikzpicture}[remember picture, overlay]%
+	\draw[fill=doc,draw=doc] (-7,-.2) rectangle (-0.3,.65);
+	\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\;\;\bfseries \chaptername\;\thecontentslabel}
+\end{tikzpicture}
+\color{doc}\large\bfseries{}}%
 {}
-{\hfill\small \thecontentspage}
+{}
+{\;\titlerule\;\pagename\;\thecontentspage}
+\titlecontents{section}[3pc]
+{\addvspace{5pt}\color{doc}\large\bfseries}
+{\color{doc}\thecontentslabel\quad}
+{}
+{\;\titlerule\;\pagename\;\thecontentspage}
 []
-\titlecontents*{subsection}[3.7pc]
-{\addvspace{-1pt}\small}
+\titlecontents{subsection}[4pc]
+{\addvspace{5pt}\color{doc}\large\bfseries}
+{\color{doc}\thecontentslabel\quad}
+{}
+{\;\titlerule\;\pagename\;\thecontentspage}
+[]
+\setcounter{tocdepth}{3} % Zeigt bis zur Ebene "subsubsection"
+\setcounter{secnumdepth}{3} % Nummeriert bis zur Ebene "subsubsection"
+\titlecontents{subsubsection}[5pc]
+{\addvspace{5pt}\color{doc}\large\bfseries}
+{\color{doc}\thecontentslabel\quad}
+{}
+{\;\titlerule\;\pagename\;\thecontentspage}
+[]
+\titlecontents{lecture} % Das ist das richtige
+[0pc]
+{\centering\addvspace{5pt}\color{doc}\hfill}
 {}
 {}
-{\ --- \small\thecontentspage}
-[ \textbullet\ ][]
+{\hfill\;\thecontentspage}
+\titlecontents{extras}[3pc]
+{\addvspace{30pt}\color{white}%
+\begin{tikzpicture}[remember picture, overlay]%
+	\draw[fill=doc,draw=doc] (-7,-.2) rectangle (-0.3,.65);% -3.4 nach links reicht
+	\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\;\;\bfseries\vphantom{bp}\;\thecontentslabel};%
+	\node[star, star points=5, star point ratio=0.39, draw, fill=white, minimum size=5pt, rotate=180] at (-.8,0.22) {};%
+\end{tikzpicture}
+\color{white}\large\bfseries}%
+{\color{white}}
+{\color{white}}
+{\color{doc}\;\titlerule\;\pagename\;\thecontentspage}
+
+
+
 
 \makeatletter
 \renewcommand{\tableofcontents}{%
-	\chapter*{%
-	  \vspace*{-20\p@}%
-	  \begin{tikzpicture}[remember picture, overlay]%
-		  \pgftext[right,x=15cm,y=0.2cm]{\color{doc!60}\Huge\sc\bfseries \contentsname}
-		  \draw[fill=doc!60,draw=doc!60] (10,-.75) rectangle (20,1);%
-		  \clip (10,-.75) rectangle (20,1);
-		  \pgftext[right,x=15cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname}
-	  \end{tikzpicture}}%
-	\@starttoc{toc}}
+\hypertarget{toc}{}
+%\index{00@Inhaltsverzeichnis\hypertarget{indexstart}{}}
+\chapter*{
+	\vspace*{-20\p@}
+	\begin{tikzpicture}[remember picture, overlay]
+		\pgftext[right,x=14.9cm,y=0.2cm]{\color{doc}\Huge\sc\bfseries \contentsname}
+		\draw[fill=doc,draw=doc] (\balkenx,-.75) rectangle (20,1);
+		\clip (\balkenx,-.75) rectangle (20,1);
+		\pgftext[right,x=14.9cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname}
+	\end{tikzpicture}
+}%
+\begingroup
+\hypersetup{linkcolor=doc}% << Hier TOC-Linkfarbe setzen
+\@starttoc{toc}
+\endgroup
+}
 \makeatother
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ALIGN WITH LESS VSPACE %
+% ALIGN VSPACE %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setlength{\jot}{0pt}
+\setlength{\jot}{5pt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SIMPLE REFERENCE MAKER WITH CORRECT COUNTER %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcommand{\preplabel}[1]{%
+	\addtocounter{#1}{-1}%
+	\refstepcounter{#1}%
+	\tikz[remember picture,overlay]{%
+	\node[anchor=south,yshift=2.5em] (#1) at (0, 0) {\phantomsection};
+	}%
+	\unskip\ignorespaces\unskip
+}
+\let\oldlabel\label{}
+\renewcommand{\label}[1]{\unskip\oldlabel{#1}\ignorespaces} %\ignorespaces gegen Einrückung am Zeilenanfang
 
-\newcommand{\preplabel}[1]{
+
+\newcommand{\oldpreplabel}[1]{
     \addtocounter{#1}{-1}
     \refstepcounter{#1}
 }
+
+
+
+
+% Markieren wie mit Textmarker
+\newcommand{\highlight}[3]{\raisebox{-\dimexpr#1mm+1ex/2\relax}{\tcbox[colback=#2!40, colframe=#2!40, arc=2mm, boxrule=0mm, left=#1mm, right=#1mm, top=#1mm, bottom=#1mm]{#3}}} % #1 = 0.5 ist gut oder etwas kleiner
+
+% In der Summe stehen die Grenzen immer drüber, auch bei anderen Sachen (kann mit \sum\nolimits_{} kurzzeitig überschrieben werden)
+\everymath{\displaystyle}
+
+% Fetter Text auch im Mathemodus
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{{\ifmmode%
+\bm{#1}%
+\else
+\oldtextbf{\mathversion{bold}#1}%
+\fi}}
+% (Die geschweiften Klammern sind ganz wichtig, damit Latex in einer Matheumgebung an erster Stelle nicht denkt, das was jetzt kommt ist nicht im Mahtemodus)
+
+
+% Das leere Zeichen, für die Turingmaschine
+\let\oldtextvisiblespace\textvisiblespace{}
+\renewcommand{\textvisiblespace}{\textsf{\oldtextvisiblespace}\hspace{0pt}}
+
+
+% % \ldots oder \dotsc je nach Mathemodus oder nicht, denn \ldots im Mathemodus kann schlecht sein.
+% \let\oldldots\ldots{}
+% \renewcommand{\ldots}{%
+%   \ifmmode%
+%     \dotsc%
+%   \else
+%     \oldldots%
+%   \fi
+% }
+\newcommand{\mydots}{\ensuremath{\dotsc}}
+\renewcommand{\ldots}{\ensuremath{\dotsc}}
+
+
+
+
+% Index am Ende
+\let\oldprintindex\printindex
+\renewcommand{\printindex}{
+	\newpage
+	% \begin{tikzpicture}[remember picture,overlay]
+	%   \node (topanchor) at ([yshift=-1cm]current page.north) {\phantomsection};
+	% \end{tikzpicture}
+	\phantomsection{}
+	\addcontentsline{toc}{extras}{Index}
+	\hypertarget{indexstart}{}
+	\oldprintindex{}
+}
+
+% Man kann auch mehrere Indexeinträge gleichzeitig anlegen
+\let\oldindex\index{}
+\renewcommand{\index}[1]{%
+  \foreach\x in{#1}{\oldindex{\x}}\ignorespaces% %\ignorspaces sehr wichtig, damit keine Einrückung am Zeilenanfang entsteht
+}
+
+% Durchstreichen in Farbe, wenn man kürzen kann für Mathemodus und Textmodus
+\newcommand{\ccancel}[2]{%
+	\ifmmode%
+	\tikz[baseline = (X.base)]{%
+		\node[inner sep=0pt, outer sep=0pt] (X) {$#2$};
+		\draw[#1, thick] (X.south west)-- (X.north east);}
+	\else%
+	\tikz[baseline = (X.base)]{%
+		\node[inner sep=0pt, outer sep=0pt] (X) {#2};
+		\draw[#1, thick] (X.south west)-- (X.north east);}
+	\fi%
+}
+
+% Zusammenfassung mit multicols in Pistaziengrün
+\definecolor{decentcolor}{HTML}{BBD686}
+\newtcolorbox{decentbox}{
+	before=\vspace{7pt},
+	enhanced,
+	breakable,
+	boxsep=2pt,
+	arc=12pt,
+	colback=decentcolor!10,
+	boxrule=2pt,
+	colframe=decentcolor!25,
+	valign=center,
+	halign=center
+}
+\newcommand{\wichtigeDinge}[2]{
+    \begin{decentbox}%
+        \vphantom{Pp}#1%
+    \end{decentbox}%
+	\if\relax\detokenize{#2}\relax
+		% Argument 2 ist leer – nichts tun
+	\else
+		\begin{multicols}{2}%
+		#2%
+		\end{multicols}%
+	\fi
+}
+
+% Eine Leere Seite einfügen, wenn Seite mehr als 50% beschrieben
+\makeatletter
+\newcommand{\maybeAddEmptyPage}{%
+  \par\vspace{0pt}% sichert vorherigen Absatz ab
+  \begingroup
+    \edef\currentlabel{maybeemptypage-\the\value{page}}%
+    \zref@labelbyprops{\currentlabel}{abspage}%
+    \ifdim\pagetotal{} > 0.5\pagegoal{}
+      \clearpage
+      \null\newpage
+    \fi
+  \endgroup
+}
+\makeatother
+
+% Datum aus \lecturedivider in Counter speichern
+\newcounter{mydate}
+\makeatletter
+\newcommand{\splitdate}[1]{%
+	% Zerlegung: Teile #1 = DD.MM.YYYY in parsedday, parsedmonth, parsedyear
+	\def\@splitdate##1.##2.##3\relax{%
+		\def\parsedday{##1}%
+		\def\parsedmonth{##2}%
+		\def\parsedyear{##3}%
+	}%
+	\expandafter\@splitdate#1\relax
+	% Nun parsedyear, parsedmonth, parsedday enthalten Strings wie "08", "04", "2025"
+	% Setze mydate auf YYYYMMDD:
+	\setcounter{mydate}{\numexpr\parsedyear*10000 + \parsedmonth*100 + \parsedday\relax}%
+}
+\makeatother
+
+% include umdefinieren, sodass vielleicht eine leere Seite hinzugefügt wird, wenn die Vorlesung beim aktuellen war
+\let\oldinclude\include
+\renewcommand{\include}[1]{%
+	\clearpage
+	\begingroup
+		\input{#1}%
+		\ifnum\numexpr\value{mydate}\relax < \numexpr\year*10000+\month*100+\day\relax%
+			\clearpage%
+		\else%
+			\maybeAddEmptyPage{}
+			\clearpage
+		\fi
+	\endgroup
+}
+
+% Vorlesungstrenner
+\newcounter{vorlesung}
+\newcommand{\lecturedivider}[1]{
+	\hypertarget{lecture.\thevorlesung}{}%
+	\vspace{1em}
+	\splitdate{#1}
+	\noindent
+	\begin{linebox}\end{linebox}
+
+	\refstepcounter{vorlesung} % Zähler erhöhen
+	% \addcontentsline{toc}{lecture}{\thevorlesung. Vorlesung vom #1} % Vorlesung im Inhaltsverzeichnis eintragen
+	\addtocontents{toc}{\protect\contentsline{lecture}{\thevorlesung.\ Vorlesung vom #1}{\thepage}{lecture.\thevorlesung}} % Füge ins Inhaltsverzeichnis, aber nicht in die Metadaten hinzu
+	\pdfbookmark[2]{\thevorlesung.\ Vorlesung vom #1}{bm:lecture.\thevorlesung} % Füge Vorlesung zu Metadaten hinzu untergeordnet
+
+	\noindent\makebox[\textwidth][c]{\textbf{\thevorlesung. Vorlesung vom #1}} % Date centered
+	\noindent
+	\begin{linebox}\end{linebox}
+	\vspace{1em}
+}
+
+
+% \newcommand{\lecturedivider}[1]{%
+%   \refstepcounter{vorlesung}%
+%   % --- normal ins Inhaltsverzeichnis (unter Kapitel einordnen) ---
+%   \addcontentsline{toc}{section}{\thevorlesung. Vorlesung vom #1}%
+%   % --- zusätzlich in separate Liste schreiben ---
+%   \addcontentsline{lec}{lecture}{\thevorlesung. Vorlesung vom #1}%
+%   % --- eigenes PDF-Lesezeichen erzeugen ---
+%   \pdfbookmark[1]{\thevorlesung. Vorlesung vom #1}{lecture.\thevorlesung}%
+%   % --- Überschrift im Text ---
+%   \vspace{1em}%
+%   \noindent\makebox[\textwidth][c]{\textbf{\thevorlesung. Vorlesung vom #1}}%
+%   \vspace{1em}%
+% }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Einstellungen zu Countern
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% globalcounter wird zu Beginn definiert
+\newcounter{counter1}
+\newcounter{counter2}
+\newcounter{counter3}
+
+
+% no counter mit separator sign=\hspace{-4pt}:
+\newcommand{\countergroupA}{
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{note}{Bemerkung}{note style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Folgerung}{Folgerung}{Folgerung style}{folg}
+	\renewtcbtheorem[number within=chapter, use counter=aufg]{Exercise}{Aufgabe}{Exercise style}{aufg}
+	\renewcommand{\thealgocf}{\thechapter.\arabic{algocf}}
+	\counterwithin{algocf}{chapter}
+}
+\newcommand{\countergroupB}{
+	% Wer alles einzeln gezählt möchte
+	\renewtcbtheorem[number within=chapter, use counter=thm]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=cor]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=lemma]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=fact]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=notation]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=prop]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{note style}{def}
+}
+\newcommand{\countergroupC}{
+	% Orientiert sich an Koch (leider nicht immer möglich)
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=counter1]{note}{Bemerkung}{note style}{def}
+}
+\newcommand{\countergroupD}{
+	% Ähnliche Dinge zusammengefasst
+	\renewtcbtheorem[number within=chapter, use counter=clm]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=lemma]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=lemma]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=nt]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=ex]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=lemma]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=clm]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{note style}{def}
+}
+\newcommand{\countergroupEDM}{
+	% Ähnliche Dinge zusammengefasst
+	\renewtcbtheorem[use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[no counter]{Definition}{Definition}{Definition style, theorem name}{def}
+	\renewtcbtheorem[no counter]{note}{Bemerkung}{note style, theorem name}{def}
+}
+\newcommand{\countergroupGruNum}{
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[no counter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{note}{Bemerkung}{note style}{def}
+	\numberwithin{algocf}{chapter}
+}
+\newcommand{\countergroupTI}{
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{note}{Bemerkung}{note style}{def}
+}
+\newcommand{\countergroupAnalysis}{
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[no counter]{note}{Bemerkung}{note style, theorem name}{def}
+}
+\newcommand{\countergroupLernEDM}{
+	\counterwithout{globalcounter}{chapter}
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[no counter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[no counter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[no counter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[no counter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[use counter=counter1]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[no counter]{note}{Bemerkung}{note style}{def}
+}
+\newcommand{\countergroupLernAna}{
+	\counterwithout{globalcounter}{chapter}
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[no counter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[no counter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[no counter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[no counter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[no counter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[no counter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[no counter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[no counter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[no counter]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[no counter]{note}{Bemerkung}{note style}{def}
+}
+%\renewtcbtheorem[no counter]{Definition}{Definition}{Definition style, separator sign=\hspace{-.3em}:}{def}
+\newcommand{\countergroupLogik}{
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{Corollary}{Korollar}{Corollary style}{th}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[no counter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{note}{Bemerkung}{note style}{def}
+	\renewtcbtheorem[number within=chapter, use counter=aufg]{Exercise}{Aufgabe}{Exercise style}{aufg}
+	\renewtcbtheorem[number within=section, use counter=globalcounter]{Folgerung}{Folgerung}{Folgerung style}{folg}
+	% \renewcommand{\thealgocf}{\thechapter.\arabic{algocf}}
+	% \counterwithin{algocf}{chapter}
+	\renewcommand{\theglobalcounter}{\thesection.\arabic{globalcounter}}
+	\counterwithin{globalcounter}{section}
+}
+\newcommand{\countergroupGeoTopo}{
+	% Der globale Zähler ist standardmäßig ausgewählt ohne \countergroupA
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Theorem}{Theorem}{Theorem style}{th}
+	\renewtcbtheorem[use counter=cor]{Corollary}{Korollar}{Corollary style}{cor}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{mlemma}{Lemma}{mlemma style}{th}
+	\renewtcbtheorem[no counter]{fact}{Fakt}{fact style}{th}
+	\renewtcbtheorem[no counter]{question}{Frage}{question style}{def}
+	\renewtcbtheorem[no counter]{notation}{Notation}{notation style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Prop}{Proposition}{Prop style}{th}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{claim}{Satz}{claim style}{th}
+	\renewtcbtheorem[no counter]{Example}{Beispiel}{Example style}{ex}
+	\renewtcbtheorem[number within=chapter, use counter=globalcounter]{Definition}{Definition}{Definition style}{def}
+	\renewtcbtheorem[no counter]{note}{Bemerkung}{note style}{def}
+	\numberwithin{algocf}{chapter}
+}
+
+% Definition ohne counter:  \renewtcbtheorem[no counter]{Definition}{Definition}{Definition style, separator sign=\hspace{-.3em}:}{def}

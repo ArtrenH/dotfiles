@@ -1,29 +1,211 @@
-\documentclass{report}
+\documentclass[a4paper,12pt]{report}
 
-\input{~/dotfiles/tex/templates/preamble.tex}
-\input{~/dotfiles/tex/templates/macros.tex}
-\input{~/dotfiles/tex/templates/letterfonts.tex}
+\input{~/dotfiles/tex/template_johannes/input.tex}
 
-\title{\Huge{Some Class}\\Random Examples}
-\author{\huge{Your Name}}
-\date{}
-
-\usepackage{silence}
-\WarningFilter{latexfont}{}
+\title{Dokumententitel}
+\author{Autor}
 
 \begin{document}
 
 \maketitle
-\newpage% or \cleardoublepage
-% \pdfbookmark[<level>]{<title>}{<dest>}
-\pdfbookmark[section]{\contentsname}{toc}
 \tableofcontents
-\pagebreak
 
-\chapter{}
-\section{Random Examples}
-\dfn{}{
+\lhead{Links}
+\chead{Mitte}
+\rhead{Rechts}
 
+\setlength{\parindent}{0pt}
+
+\newpage
+\chapter{Die wichtigsten Boxen}
+
+\dfn{Test}{
 }
+\clm{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:zahl}
+    Inhalt
+}
+\lemma{So siehts aus}{
+}
+\nt{Blablabla}{
+    \preplabel{globalcounter}
+    \label{globalcounter:zahl}
+    So und so ist das gemeint
+}
+
+\cor{Wird auch häufig verwendet}{
+}
+\begin{myproof}[Beweis]
+    Natürlich dürfen Beweise nicht fehlen
+\end{myproof}
+\nota{Notation}{
+    So notieren wir Notationen
+}
+\ex{Verständnis}{
+    \preplabel{globalcounter}
+    \label{globalcounter:zahl}
+    Damit ihr alles versteht, kommt hier ein Beispiel
+}
+\prop{Auch verwendet}{
+}
+\aufg{Meist ohne Namen}{
+    \preplabel{aufg}
+    \label{aufg:zahl}
+    Gute Vorlesungen haben auch Aufgaben
+}
+\folg{Wir wissen also:}{
+    Das, was wir jetzt folgern
+}
+
+
+
+
+\newpage
+\chapter{Vorschau der Vorlage}
+
+\section{Varianten mit Nummerierung}
+
+\lecturedivider{01.01.}
+
+\dfn{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:1.1}
+    Dies ist eine Definition
+}
+\clm{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:1.2}
+    Dies ist ein Satz
+}
+\lemma{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:1.3}
+    Dies ist ein Lemma
+}
+\nota{Name}{
+    Hier wird eine Notation eingeführt
+}
+\fac{Name}{
+    Dies ist ein Fakt
+}
+\cor{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:1.6}
+    Dies ist ein Korollar
+}
+\prop{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:1.7}
+    Dies ist eine Proposition
+}
+\ex{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:1.8}
+    Hier wird ein Beispiel erklärt
+}
+\nt{Name}{
+    \preplabel{globalcounter}
+    \label{globalcounter:1.9}
+    Dies ist eine Bemerkung
+}
+\qs{Name}{
+    Dies ist eine Frage
+}
+\solu{Name}{
+    Dies ist eine Lösung
+}
+\aufg{Name}{
+    Hier wird eine Aufgabe gestellt
+}
+\thm{Name}{
+    Wer benutzt schon ein Theorem
+}
+\thmcon{Name}
+\pf{Name}{
+    Anscheindend ist das ein Beweis
+}
+\behauptung{Name}{
+    Dies soll eine Behauptung sein
+}
+\folg{Name}{
+    Dies ist eine Folgerung
+}
+
+
+
+\section{Varianten ohne Nummerierung}
+
+
+\dfnstern{Name}{
+    Dies ist eine Definition
+}
+\clmstern{Name}{
+    Dies ist ein Satz
+}
+\lemmastern{Name}{
+    Dies ist ein Lemma
+}
+\notastern{Name}{
+    Hier wird eine Notation eingeführt
+}
+\facstern{Name}{
+    Dies ist ein Fakt
+}
+\corstern{Name}{
+    Dies ist ein Korollar
+}
+\propstern{Name}{
+    Dies ist eine Proposition
+}
+\exstern{Name}{
+    Hier wird ein Beispiel erklärt
+}
+\ntstern{Name}{
+    Dies ist eine Bemerkung
+}
+\qsstern{Name}{
+    Dies ist eine Frage
+}
+\aufgstern{Name}{
+    Hier wird eine Aufgabe gestellt
+}
+\thmstern{Name}{
+    Wer benutzt schon ein Theorem
+}
+\pfstern{Name}{
+    Anscheindend ist das ein Beweis
+}
+\behauptungstern{Name}{
+    Dies soll eine Behauptung sein
+}
+
+
+\dfn{test}{
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition. \\
+    Das ist eine lange Definition.
+}
+
+
 
 \end{document}
