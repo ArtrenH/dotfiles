@@ -110,10 +110,32 @@
     \newtcbtheorem[number within=chapter, use counter=nt]{note}{Bemerkung}{Note style}{def}
 }
 
+\newcommand{\oneCounterBoxes}{
+    \usetikzlibrary{arrows,calc,shadows.blur}
+    \newcounter{boxCounter} \numberwithin{boxCounter}{section}
+    \makeatletter
+    \renewcommand{\theboxCounter}{\arabic{section}.\arabic{boxCounter}} % Only section + counter
+    \makeatother
+
+
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Definition}{Definition}{Definition style}{def}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{claim}{Satz}{claim style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Obs}{Beobachtung}{Obs style}{th}
+
+    \newtcbtheorem[no counter]{note}{Bemerkung}{Note style}{def}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Example}{Beispiel}{Example style}{ex}
+
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Theorem}{Theorem}{Theorem style}{th}
+}
+
 \newcommand{\AnaBoxes}{
     \usetikzlibrary{arrows,calc,shadows.blur}
     \newcounter{boxCounter} \numberwithin{boxCounter}{chapter}
     \newcounter{dfn} \numberwithin{dfn}{chapter}
+    \newcounter{ex} \numberwithin{ex}{chapter}
 
     \newtcbtheorem[number within=chapter, use counter=dfn]{Definition}{Definition}{Definition style}{def}
     \newtcbtheorem[number within=chapter, use counter=boxCounter]{claim}{Satz}{claim style}{th}
@@ -123,7 +145,7 @@
     \newtcbtheorem[number within=chapter, use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
 
     \newtcbtheorem[no counter]{note}{Bemerkung}{Note style}{def}
-    \newtcbtheorem[no counter]{Example}{Beispiel}{Example style}{ex}
+    \newtcbtheorem[number within=chapter, use counter=ex]{Example}{Beispiel}{Example style}{ex}
     \newtcbtheorem[number within=chapter, use counter=boxCounter]{notation}{Notation}{Fact style}{th}
     \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
 
@@ -141,13 +163,14 @@
     \newcounter{clm} \numberwithin{clm}{section}
     \newtcbtheorem[number within=section, use counter=clm]{claim}{Satz}{claim style}{th}
     \newtcbtheorem[number within=section, use counter=boxCounter]{mlemma}{Lemma}{Lemma style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Corollary}{Korollar}{Corollary style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Corollary}{Corollary}{Corollary style}{th}
     \newtcbtheorem[number within=section, use counter=boxCounter]{Prop}{Proposition}{Prop style}{th}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{fact}{Fakt}{Fact style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{fact}{Fact}{Fact style}{th}
 
-    \newtcbtheorem[number within=section, use counter=boxCounter]{note}{Bemerkung}{Note style}{def}
-    \newtcbtheorem[number within=section, use counter=boxCounter]{Example}{Beispiel}{Example style}{ex}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{note}{Note}{Note style}{def}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{Example}{Example}{Example style}{ex}
     \newtcbtheorem[number within=section, use counter=boxCounter]{notation}{Notation}{Fact style}{th}
+    \newtcbtheorem[number within=section, use counter=boxCounter]{convention}{Convention}{Fact style}{th}
     \newtcbtheorem[no counter]{Behauptung}{Behauptung}{Behauptung style}{th}
 
     \newtcbtheorem[number within=section, use counter=boxCounter]{Theorem}{Theorem}{Theorem style}{th}
@@ -291,6 +314,8 @@
 \newcommand{\notastar}[2]{\begin{notation*}{#1}{}#2\end{notation*}}
 \newcommand{\fac}[2]{\begin{fact}{#1}{}#2\end{fact}}
 \newcommand{\facstar}[2]{\begin{fact*}{#1}{}#2\end{fact*}}
+\newcommand{\conv}[2]{\begin{convention}{#1}{}#2\end{convention}}
+\newcommand{\convstar}[2]{\begin{convention*}{#1}{}#2\end{convention*}}
 \newcommand{\cor}[2]{\begin{Corollary}{#1}{}#2\end{Corollary}}
 \newcommand{\corstar}[2]{\begin{Corollary*}{#1}{}#2\end{Corollary*}}
 \newcommand{\prop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
@@ -304,6 +329,7 @@
 \newcommand{\prob}[2]{\begin{problem}{#1}{}#2\end{problem}}
 \newcommand{\probstar}[2]{\begin{problem*}{#1}{}#2\end{problem*}}
 \newcommand{\solu}[2]{\begin{solution}{#1}{}#2\end{solution}}
+\newcommand{\obs}[2]{\begin{Obs}{#1}{}#2\end{Obs}}
 
 \newcommand{\thm}[2]{\begin{Theorem}{#1}{}#2\end{Theorem}}
 \newcommand{\thmstar}[2]{\begin{Theorem*}{#1}{}#2\end{Theorem*}}
@@ -318,7 +344,7 @@
   \makebox[\linewidth]{\color{gray!70}\rule{\linewidth}{0.6pt}} % Horizontal line with color
   \vspace{-1.2em}
   \begin{center}
-    \textbf{#1. Vorlesung - #2} % Date centered
+    \textbf{#1. Lecture - #2} % Date centered
   \end{center}
   \vspace{-1.5em}
   \noindent
@@ -431,8 +457,8 @@
 % TABLE OF CONTENTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\chaptername}{Kapitel}
-\newcommand{\pagename}{Seite }
+% \renewcommand{\chaptername}{Kapitel}
+% \newcommand{\pagename}{Seite }
 
 \usepackage{tikz}
 \definecolor{doc}{RGB}{0,60,110}
@@ -441,7 +467,7 @@
 \titlecontents{chapter}[3.7pc]
 {\addvspace{30pt}%
 	\begin{tikzpicture}[remember picture, overlay]%
-		\draw[fill=doc!60,draw=doc!60] (-7,-.1) rectangle (-0.9,.5);%
+		\draw[fill=doc!60,draw=doc!60] (-7,-.1) rectangle (-0.3,.5);%
 		\pgftext[left,x=-3.5cm,y=0.2cm]{\color{white}\Large\sc\bfseries \chaptername\ \thecontentslabel}
 	\end{tikzpicture}\color{doc!60}\large\sc\bfseries}%
 {}

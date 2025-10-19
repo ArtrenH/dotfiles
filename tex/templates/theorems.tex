@@ -158,6 +158,24 @@
     }
 }
 
+\tcbset{Obs style/.style={
+        enhanced,
+        breakable,
+        colback = myexamplebg,
+        frame hidden,
+        boxrule = 0sp,
+        borderline west = {2pt}{0pt}{myexamplefr},
+        sharp corners,
+        detach title,
+        before upper = \tcbtitle\par\smallskip,
+        coltitle = myexamplefr,
+        fonttitle = \bfseries\sffamily,
+        description font = \mdseries,
+        separator sign none,
+        segmentation style={solid, myexamplefr},
+    }
+}
+
 \tcbset{claim style/.style={
         enhanced
         ,breakable
